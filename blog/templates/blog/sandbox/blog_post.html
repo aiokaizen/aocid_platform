@@ -1,0 +1,364 @@
+{% extends 'website/layouts/master.html' %}
+{% load static %}
+{% load thumbnail %}
+
+{% block main %}
+
+<section class="wrapper image-wrapper bg-image bg-overlay text-white" data-image-src="{{ post.image|thumbnail_url:'large' }}">
+    <div class="container pt-18 pb-15 pt-md-20 pb-md-19 text-center">
+      <div class="row">
+        <div class="col-md-10 col-xl-8 mx-auto">
+          <div class="post-header">
+            <div class="post-category text-line text-white">
+              {% for category in post.categories.all %}
+                <a href="{% url 'blog:blog_category' category=category.slug %}" class="text-reset" rel="category">{{ category.name }}</a>
+              {% endfor %}
+            </div>
+            <!-- /.post-category -->
+            <h1 class="display-1 mb-4 text-white">{{ post.title }}</h1>
+            <ul class="post-meta text-white">
+              <li class="post-date"><i class="uil uil-calendar-alt"></i><span>{{ post.published_at }}</span></li>
+              <li class="post-author"><i class="uil uil-user"></i><a href="#" class="text-reset"><span>By {{ post.author.user.username }}</span></a></li>
+              <li class="post-comments"><i class="uil uil-comment"></i><a href="#comments" class="text-reset">{{ comments|length }}<span> Comments</span></a></li>
+              {% comment %} <li class="post-likes"><i class="uil uil-heart-alt"></i><a href="#" class="text-reset">3<span> Likes</span></a></li> {% endcomment %}
+            </ul>
+            <!-- /.post-meta -->
+          </div>
+          <!-- /.post-header -->
+        </div>
+        <!-- /column -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
+<!-- /section -->
+
+<section class="wrapper bg-light">
+  <div class="container pb-14 pb-md-16">
+    <div class="row">
+      <div class="col-lg-10 mx-auto">
+        <div class="blog single mt-n17">
+          <div class="card">
+            <figure class="card-img-top"><img src="{{ post.image|thumbnail_url:'medium-x' }}" alt="" /></figure>
+            <div class="card-body">
+              <div class="classic-view">
+                <article class="post">
+                      <div class="post-content mb-5">
+                        {% comment %} <h2 class="h1 mb-4">Cras mattis consectetur purus fermentum</h2>
+                        <p>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur. Curabitur blandit tempus porttitor. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Nullam quis risus eget porta ac consectetur vestibulum.</p>
+                        <p>Donec sed odio dui consectetur adipiscing elit. Etiam adipiscing tincidunt elit, eu convallis felis suscipit ut. Phasellus rhoncus tincidunt auctor. Nullam eu sagittis mauris. Donec non dolor ac elit aliquam tincidunt at at sapien. Aenean tortor libero, condimentum ac laoreet vitae, varius tempor nisi. Duis non arcu vel lectus urna mollis ornare vel eu leo.</p>
+                        <div class="row g-6 mt-3 mb-10">
+                          <div class="col-md-6">
+                            <figure class="hover-scale rounded cursor-dark"><a href="./assets/img/photos/b8-full.jpg" data-glightbox="title: Heading; description: Purus Vulputate Sem Tellus Quam" data-gallery="post"> <img src="./assets/img/photos/b8.jpg" alt="" /></a></figure>
+                          </div>
+                          <!--/column -->
+                          <div class="col-md-6">
+                            <figure class="hover-scale rounded cursor-dark"><a href="./assets/img/photos/b9-full.jpg" data-glightbox data-gallery="post"> <img src="./assets/img/photos/b9.jpg" alt="" /></a></figure>
+                          </div>
+                          <!--/column -->
+                          <div class="col-md-6">
+                            <figure class="hover-scale rounded cursor-dark"><a href="./assets/img/photos/b10-full.jpg" data-glightbox data-gallery="post"> <img src="./assets/img/photos/b10.jpg" alt="" /></a></figure>
+                          </div>
+                          <!--/column -->
+                          <div class="col-md-6">
+                            <figure class="hover-scale rounded cursor-dark"><a href="./assets/img/photos/b11-full.jpg" data-glightbox data-gallery="post"> <img src="./assets/img/photos/b11.jpg" alt="" /></a></figure>
+                          </div>
+                          <!--/column -->
+                        </div>
+                        <!-- /.row -->
+                        <p>Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Maecenas faucibus mollis interdum. Donec id elit non mi porta gravida at eget metus. Nullam quis risus eget urna mollis ornare vel eu leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum. Praesent commodo cursus magna.</p>
+                        <blockquote class="fs-lg my-8">
+                          <p>Sed posuere consectetur est at lobortis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula lacinia odio sem nec elit purus.</p>
+                          <footer class="blockquote-footer">Very important person</footer>
+                        </blockquote>
+                        <h3 class="h2 mb-4">Sit Vulputate Bibendum Purus</h3>
+                        <p>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vestibulum id ligula porta felis euismod semper.</p>
+                        <p>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Sed posuere consectetur est at lobortis. Donec id elit non mi porta gravida at eget metus. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p> {% endcomment %}
+
+                        {{ post.content|safe }}
+                      </div>
+                      <!-- /.post-content -->
+
+                      <div class="post-footer d-md-flex flex-md-row justify-content-md-between align-items-center mt-8">
+                        <div>
+                          <ul class="list-unstyled tag-list mb-0">
+                            {% for tag in post.tags.values %}
+                            <li><a href="{% url 'blog:blog_tag' tag=tag.slug %}" class="btn btn-soft-ash btn-sm rounded-pill mb-0">{{ tag.name }}</a></li>
+                            {% endfor %}
+                          </ul>
+                        </div>
+                        <!-- ./tags -->
+
+                        <div class="mb-0 mb-md-2">
+                          <div class="dropdown share-dropdown btn-group">
+                            <button class="btn btn-sm btn-red rounded-pill btn-icon btn-icon-start dropdown-toggle mb-0 me-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <i class="uil uil-share-alt"></i> Share </button>
+                            <div class="dropdown-menu">
+                              <a class="dropdown-item" href="https://twitter.com/intent/tweet?text={{request.get_host}}{{ request.get_full_path }}"><i class="uil uil-twitter"></i>Twitter</a>
+                              <a class="dropdown-item" href="https://www.facebook.com/sharer/sharer.php?u={{request.get_host}}{{ request.get_full_path }}"><i class="uil uil-facebook-f"></i>Facebook</a>
+                              <a class="dropdown-item" href="http://www.linkedin.com/shareArticle?url={{request.get_host}}{{ request.get_full_path }}"><i class="uil uil-linkedin"></i>Linkedin</a>
+                            </div>
+                            <!--/.dropdown-menu -->
+                          </div>
+                          <!--/.share-dropdown -->
+                        </div>
+                        <!-- ./share -->
+                      </div>
+                      <!-- /.post-footer -->
+                </article>
+                <!-- /.post -->
+              </div>
+              <!-- /.classic-view -->
+              <hr />
+
+              <div class="author-info d-md-flex align-items-center mb-3">
+                  <div class="d-flex align-items-center">
+                    <figure class="user-avatar"><img class="rounded-circle" alt="" src="{{ post.author.avatar|thumbnail_url:'small' }}" /></figure>
+                    <div>
+                      <h6><a href="#" class="link-dark">{{ post.author.user.first_name }} {{ post.author.user.last_name }}</a></h6>
+                      <span class="post-meta fs-15">{{ post.author.profession }}</span>
+                    </div>
+                  </div>
+                  {% comment %}
+                  <div class="mt-3 mt-md-0 ms-auto">
+                    <a href="#" class="btn btn-sm btn-soft-ash rounded-pill btn-icon btn-icon-start mb-0"><i class="uil uil-file-alt"></i> All Posts</a>
+                  </div>
+                  {% endcomment %}
+              </div>
+              <!-- /.author-info -->
+              <p>{{ post.author.description|default:"" }}</p>
+              <nav class="nav social">
+                  {% if post.author.twitter %}<a href="{{ post.author.twitter }}" target="_blank"><i class="uil uil-twitter"></i></a>{% endif %}
+                  {% if post.author.facebook %}<a href="{{ post.author.facebook }}" target="_blank"><i class="uil uil-facebook-f"></i></a>{% endif %}
+                  {% if post.author.dribbble %}<a href="{{ post.author.dribbble }}" target="_blank"><i class="uil uil-dribbble"></i></a>{% endif %}
+                  {% if post.author.instagram %}<a href="{{ post.author.instagram }}" target="_blank"><i class="uil uil-instagram"></i></a>{% endif %}
+                  {% if post.author.youtube %}<a href="{{ post.author.youtube }}" target="_blank"><i class="uil uil-youtube"></i></a>{% endif %}
+              </nav>
+              <!-- /.social -->
+              <hr />
+
+              {% if like_also %}
+              <h3 class="mb-6">You Might Also Like</h3>
+              <div class="swiper-container blog grid-view mb-16" data-margin="30" data-dots="true" data-items-md="2" data-items-xs="1">
+                <div class="swiper">
+                  <div class="swiper-wrapper">
+                    {% for post in like_also %}
+                    <div class="swiper-slide">
+                      <article>
+                        <figure class="overlay overlay-1 hover-scale rounded mb-5"><a href="{% url 'blog:blog_post' post=post.slug %}"> <img src="{{ post.image|thumbnail_url:'medium' }}" alt="" /></a>
+                          <figcaption>
+                            <h5 class="from-top mb-0">Read More</h5>
+                          </figcaption>
+                        </figure>
+                        <div class="post-header">
+                          <div class="post-category text-line">
+                            {% for category in post.categories.all %}
+                              <a href="{% url 'blog:blog_category' category=category.slug %}" class="hover" rel="category">{{ category.name }}</a>
+                            {% endfor %}
+                          </div>
+                          <!-- /.post-category -->
+                          <h2 class="post-title h3 mt-1 mb-3"><a class="link-dark" href="{% url 'blog:blog_post' post=post.slug %}">{{ post.title }}</a></h2>
+                        </div>
+                        <!-- /.post-header -->
+                        <div class="post-footer">
+                          <ul class="post-meta mb-0">
+                            <li class="post-date"><i class="uil uil-calendar-alt"></i><span>{{ post.published_at }}</span></li>
+                            <li class="post-comments"><a href="#"><i class="uil uil-comment"></i>{{ post.get_comments_count }}</a></li>
+                          </ul>
+                          <!-- /.post-meta -->
+                        </div>
+                        <!-- /.post-footer -->
+                      </article>
+                      <!-- /article -->
+                    </div>
+                    <!--/.swiper-slide -->
+                    {% endfor %}
+                  </div>
+                  <!--/.swiper-wrapper -->
+                </div>
+                <!-- /.swiper -->
+              </div>
+              <!-- /.swiper-container -->
+              <hr />
+              {% endif %}
+
+              <div id="comments">
+                <h3 class="mb-6">{{ comments|length }} Comments</h3>
+                <ol id="singlecomments" class="commentlist">
+                  {% for comment in comments %}
+                  <li class="comment">
+                    <div class="comment-header d-md-flex align-items-center">
+                      <div class="d-flex align-items-center">
+                        {% if comment.user.avatar %}
+                          <figure class="user-avatar">
+                            <img class="rounded-circle" alt="" src="{{ comment.user.avatar|thumbnail_url:'small' }}" />
+                          </figure>
+                        {% else %}
+                          <figure class="user-avatar">
+                            <img class="rounded-circle" alt="" src="{% static 'sandbox/assets/img/avatars/generic.jpeg' %}" />
+                          </figure>
+                        {% endif %}
+                        <div>
+                          <h6 class="comment-author"><a href="#" class="link-dark">{{ comment }}</a></h6>
+                          <ul class="post-meta">
+                            <li><i class="uil uil-calendar-alt"></i>{{ comment.published_at }}</li>
+                          </ul>
+                          <!-- /.post-meta -->
+                        </div>
+                        <!-- /div -->
+                      </div>
+                      <!-- /div -->
+                      {% comment %}
+                      <div class="mt-3 mt-md-0 ms-auto">
+                        <a href="#" class="btn btn-soft-ash btn-sm rounded-pill btn-icon btn-icon-start mb-0"><i class="uil uil-comments"></i> Reply</a>
+                      </div>
+                      <!-- /div -->
+                      {% endcomment %}
+                    </div>
+                    <!-- /.comment-header -->
+                    <p>{{ comment.content }}</p>
+                  </li>
+                  {% endfor %}
+
+
+                  {% comment %}
+                  <li class="comment">
+                    <div class="comment-header d-md-flex align-items-center">
+                      <div class="d-flex align-items-center">
+                        <figure class="user-avatar"><img class="rounded-circle" alt="" src="./assets/img/avatars/u2.jpg" /></figure>
+                        <div>
+                          <h6 class="comment-author"><a href="#" class="link-dark">Nikolas Brooten</a></h6>
+                          <ul class="post-meta">
+                            <li><i class="uil uil-calendar-alt"></i>21 Feb 2022</li>
+                          </ul>
+                          <!-- /.post-meta -->
+                        </div>
+                        <!-- /div -->
+                      </div>
+                      <!-- /div -->
+                      <div class="mt-3 mt-md-0 ms-auto">
+                        <a href="#" class="btn btn-soft-ash btn-sm rounded-pill btn-icon btn-icon-start mb-0"><i class="uil uil-comments"></i> Reply</a>
+                      </div>
+                      <!-- /div -->
+                    </div>
+                    <!-- /.comment-header -->
+                    <p>Quisque tristique tincidunt metus non aliquam. Quisque ac risus sit amet quam sollicitudin vestibulum vitae malesuada libero. Mauris magna elit, suscipit non ornare et, blandit a tellus. Pellentesque dignissim ornare faucibus mollis.</p>
+                    <ul class="children">
+                      <li class="comment">
+                        <div class="comment-header d-md-flex align-items-center">
+                          <div class="d-flex align-items-center">
+                            <figure class="user-avatar"><img class="rounded-circle" alt="" src="./assets/img/avatars/u3.jpg" /></figure>
+                            <div>
+                              <h6 class="comment-author"><a href="#" class="link-dark">Pearce Frye</a></h6>
+                              <ul class="post-meta">
+                                <li><i class="uil uil-calendar-alt"></i>22 Feb 2022</li>
+                              </ul>
+                              <!-- /.post-meta -->
+                            </div>
+                            <!-- /div -->
+                          </div>
+                          <!-- /div -->
+                          <div class="mt-3 mt-md-0 ms-auto">
+                            <a href="#" class="btn btn-soft-ash btn-sm rounded-pill btn-icon btn-icon-start mb-0"><i class="uil uil-comments"></i> Reply</a>
+                          </div>
+                          <!-- /div -->
+                        </div>
+                        <!-- /.comment-header -->
+                        <p>Cras mattis consectetur purus sit amet fermentum. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Etiam porta sem malesuada magna mollis.</p>
+                        <ul class="children">
+                          <li class="comment">
+                            <div class="comment-header d-md-flex align-items-center">
+                              <div class="d-flex align-items-center">
+                                <figure class="user-avatar"><img class="rounded-circle" alt="" src="./assets/img/avatars/u2.jpg" /></figure>
+                                <div>
+                                  <h6 class="comment-author"><a href="#" class="link-dark">Nikolas Brooten</a></h6>
+                                  <ul class="post-meta">
+                                    <li><i class="uil uil-calendar-alt"></i>4 Apr 2022</li>
+                                  </ul>
+                                  <!-- /.post-meta -->
+                                </div>
+                                <!-- /div -->
+                              </div>
+                              <!-- /div -->
+                              <div class="mt-3 mt-md-0 ms-auto">
+                                <a href="#" class="btn btn-soft-ash btn-sm rounded-pill btn-icon btn-icon-start mb-0"><i class="uil uil-comments"></i> Reply</a>
+                              </div>
+                              <!-- /div -->
+                            </div>
+                            <!-- /.comment-header -->
+                            <p>Nullam id dolor id nibh ultricies vehicula ut id. Cras mattis consectetur purus sit amet fermentum. Aenean eu leo quam. Pellentesque ornare sem lacinia aenean bibendum nulla consectetur.</p>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li class="comment">
+                    <div class="comment-header d-md-flex align-items-center">
+                      <div class="d-flex align-items-center">
+                        <figure class="user-avatar"><img class="rounded-circle" alt="" src="./assets/img/avatars/u4.jpg" /></figure>
+                        <div>
+                          <h6 class="comment-author"><a href="#" class="link-dark">Lou Bloxham</a></h6>
+                          <ul class="post-meta">
+                            <li><i class="uil uil-calendar-alt"></i>3 May 2022</li>
+                          </ul>
+                          <!-- /.post-meta -->
+                        </div>
+                        <!-- /div -->
+                      </div>
+                      <!-- /div -->
+                      <div class="mt-3 mt-md-0 ms-auto">
+                        <a href="#" class="btn btn-soft-ash btn-sm rounded-pill btn-icon btn-icon-start mb-0"><i class="uil uil-comments"></i> Reply</a>
+                      </div>
+                      <!-- /div -->
+                    </div>
+                    <!-- /.comment-header -->
+                    <p>Sed posuere consectetur est at lobortis. Vestibulum id ligula porta felis euismod semper. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                  </li>
+                  {% endcomment %}
+                </ol>
+              </div>
+              <!-- /#comments -->
+              <hr />
+
+              <h3 class="mb-3">Would you like to share your thoughts?</h3>
+              <p class="mb-7 text-primary">Required fields are marked *</p>
+              <form action="{% url 'blog:blog_post' post=post.slug %}" method="POST" class="validate comment_form needs-validation" novalidate>
+                {% csrf_token %}
+                <div class="messages text-center"></div>
+                <div id="post_slug" style="display: none;">{{ post.slug }}</div>
+                <div class="form-floating mb-4">
+                  <input type="email" name="email" class="form-control" placeholder="E-mail*" id="email" required>
+                  <label for="email">E-mail *</label>
+                  <div class="invalid-feedback"> Please enter your e-mail </div>
+                </div>
+                <div class="form-floating mb-4">
+                  <textarea name="content" class="form-control" placeholder="Comment" style="height: 150px" required></textarea>
+                  <label>Comment *</label>
+                  <div class="invalid-feedback"> Please enter your comment </div>
+                </div>
+                <button type="submit" class="btn btn-primary rounded-pill btn-send mb-3 g-recaptcha">
+                  <div class="inline btn-loading d-none">
+                    <b><i class="uil uil-square" style="font-size: 20px;"></i></b>
+                  </div>
+                  <span>Comment</span>
+                </button>
+              </form>
+              <!-- /.comment-form -->
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.blog -->
+      </div>
+      <!-- /column -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container -->
+</section>
+<!-- /section -->
+
+{% endblock main %}

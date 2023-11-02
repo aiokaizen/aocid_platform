@@ -1,0 +1,4 @@
+local_settings.py
+/media
+/static
+/venv

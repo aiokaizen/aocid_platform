@@ -1,0 +1,59 @@
+{% load static %}
+{% load thumbnail %}
+
+<aside class="col-lg-4 sidebar mt-8 mt-lg-6">
+    <div class="widget">
+      <form action="{% url 'blog:blog' %}" method="POST" class="search-form">
+        {% csrf_token %}
+        <div class="form-floating mb-0">
+          <input id="search-form" name="title" type="text" class="form-control" placeholder="Search">
+          <label for="search-form">Search</label>
+        </div>
+      </form>
+      <!-- /.search-form -->
+    </div>
+    <!-- /.widget -->
+    <div class="widget">
+      <h4 class="widget-title mb-3">Latest Posts</h4>
+      <ul class="image-list">
+        {% for post in last_posts %}
+        <li>
+          <figure class="rounded"><a href="{% url 'blog:blog_post' post=post.slug %}"><img src="{{ post.image|thumbnail_url:'small' }}" alt="{{ post.title }}" /></a></figure>
+          <div class="post-content">
+            <h6 class="mb-2"> <a class="link-dark" href="{% url 'blog:blog_post' post=post.slug %}">{{ post.title }}</a> </h6>
+            <ul class="post-meta">
+              <li class="post-date"><i class="uil uil-calendar-alt"></i><span>{{ post.published_at }}</span></li>
+              <li class="post-comments"><a href="#"><i class="uil uil-comment"></i>{{ post.get_comments_count }}</a></li>
+            </ul>
+            <!-- /.post-meta -->
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+      <!-- /.image-list -->
+    </div>
+    <!-- /.widget -->
+    <div class="widget">
+      <h4 class="widget-title mb-3">Categories</h4>
+      <ul class="unordered-list bullet-primary text-reset">
+        {% for category in categories %}
+        {% with count=category.get_posts.count %}
+          {% if count %}
+          <li><a href="{% url 'blog:blog_category' category=category.slug %}">{{ category.name }} ({{ count }})</a></li>
+          {% endif %}
+        {% endwith %}
+        {% endfor %}
+      </ul>
+    </div>
+    <!-- /.widget -->
+    <div class="widget">
+      <h4 class="widget-title mb-3">Tags</h4>
+      <ul class="list-unstyled tag-list">
+        {% for tag in tags %}
+        <li><a href="{% url 'blog:blog_tag' tag=tag.slug %}" class="btn btn-soft-ash btn-sm rounded-pill">{{ tag.name }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <!-- /.widget -->
+</aside>
+<!-- /column .sidebar -->

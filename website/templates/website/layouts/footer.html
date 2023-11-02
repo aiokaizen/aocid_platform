@@ -1,0 +1,114 @@
+{% load static %}
+
+<footer class="bg-dark text-inverse">
+  <div class="container py-13 py-md-15">
+    <div class="row gy-6 gy-lg-0">
+      <div class="col-md-4 col-lg-3">
+        <div class="widget">
+          <img class="mb-4" src="{% static 'sandbox/assets/img/logo/logo_white.png' %}" style="width: 70%" alt="AO Chess Club logo" />
+          <p class="mb-4">© 2023 Ait Ourir Chess Club.<br/> All rights reserved.</p>
+          <nav class="nav social social-white">
+            <!-- <a href="#"><i class="uil uil-linkedin"></i></a> -->
+            <a href="https://www.facebook.com/aitourirchessclub" target="_blank"><i class="uil uil-facebook-f"></i></a>
+            <a href="https://www.youtube.com/@-aitourirchessclub9461" target="_blank"><i class="uil uil-youtube"></i></a>
+            <!-- <a href="#"><i class="uil uil-twitter"></i></a> -->
+            <a href="https://www.instagram.com/aitourirchessclub/" target="_blank"><i class="uil uil-instagram"></i></a>
+          </nav>
+          <!-- /.social -->
+        </div>
+        <!-- /.widget -->
+      </div>
+      <!-- /column -->
+
+      <div class="col-md-4 col-lg-3">
+        <div class="widget">
+          <h4 class="widget-title text-white mb-3">Contact Info</h4>
+          <address>
+            Dar Chabab <br class="d-none d-md-block" /> Ait Ourir, 42050
+          </address>
+          <a href="mailto:contact@aitourirchessclub.ma">contact@aitourirchessclub.ma</a> <br/>
+          <a href="tel:+212658804661">(+212) 6 58 80 46 61</a>
+        </div>
+        <!-- /.widget -->
+      </div>
+      <!-- /column -->
+
+      <div class="col-md-4 col-lg-3">
+        <div class="widget">
+          <h4 class="widget-title text-white mb-3">Learn More</h4>
+          <ul class="list-unstyled  mb-0">
+            <li><a href="{% url 'website:about_us' %}">A propos</a></li>
+            <li><a href="{% url 'website:about_us' %}#our_story">Qui somme nous</a></li>
+            <!-- <li><a href="{% url 'website:portfolio' %}#our_projects">Our Projects</a></li> -->
+            <li><a href="{% url 'website:terms' %}#terms_conditions">Conditions d'utilisation</a></li>
+            <li><a href="{% url 'website:terms' %}#privacy_policy">politique de confidentialité</a></li>
+          </ul>
+        </div>
+        <!-- /.widget -->
+      </div>
+      <!-- /column -->
+
+      <div class="col-md-12 col-lg-3">
+        <div class="widget">
+          <h4 class="widget-title text-white mb-3">Notre newsletter</h4>
+          <p class="mb-5">Abonnez-vous à notre newsletter pour recevoir nos actualités et nos offres.</p>
+          <div class="newsletter-wrapper">
+            <!-- Begin Mailchimp Signup Form -->
+            <div id="mc_embed_signup2">
+              <form action="{% url 'website:home' %}" method="post" class="validate dark-fields needs-validation newsletter-form" id="mc-embedded-subscribe-form2" novalidate>
+                {% csrf_token %}
+                <div id="mc_embed_signup_scroll2">
+                  <div class="mc-field-group input-group form-floating">
+                    <input type="email" name="email" id="email" class="form-control" placeholder="Email Address" required>
+                    <label for="email">Email Address</label>
+                    <button type="submit" class="btn btn-primary" style="border-radius: 0 5px 5px 0" id="mc-embedded-subscribe2">
+                      <div class="inline btn-loading d-none">
+                        <b><i class="uil uil-square" style="font-size: 20px;"></i></b>
+                      </div>
+                      <span>Join</span>
+                    </button>
+                    <div class="invalid-feedback">
+                      Please enter your email.
+                    </div>
+                  </div>
+                  <div class="messages mt-3 text-center" style="font-size: 13px; padding: 5px !important;"></div>
+                </div>
+              </form>
+            </div>
+            <!--End mc_embed_signup-->
+          </div>
+          <!-- /.newsletter-wrapper -->
+        </div>
+        <!-- /.widget -->
+      </div>
+      <!-- /column -->
+    </div>
+    <!--/.row -->
+  </div>
+  <!-- /.container -->
+</footer>
+
+<div class="modal fade modal-bottom-center modal-popup" id="cookies_modal" tabindex="-1">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-body p-6">
+        <div class="row">
+          <div class="col-md-12 col-lg-8 mb-4 mb-lg-0 my-auto align-items-center">
+            <h4 class="mb-2">Cookie Policy</h4>
+            <p class="mb-0">We use cookies to personalize content to make our site easier for you to use.</p>
+          </div>
+          <!--/column -->
+          <div class="col-md-5 col-lg-4 text-lg-end my-auto">
+            <a href="#" class="btn btn-primary rounded-pill" data-bs-dismiss="modal" aria-label="Close">I Understand</a>
+          </div>
+          <!--/column -->
+        </div>
+        <!--/.row -->
+      </div>
+      <!--/.modal-body -->
+    </div>
+    <!--/.modal-content -->
+  </div>
+  <!--/.modal-dialog -->
+</div>
+<!--/.modal -->

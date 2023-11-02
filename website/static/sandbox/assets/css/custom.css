@@ -1,0 +1,31 @@
+.btn-loading {
+  animation: rotate 2s infinite ease-in-out;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(359deg);
+  }
+}
+
+#services-menu-item.mega-2-items {
+  width: 880px !important;
+  transform: translatex(-50%);
+  margin-left: 60% !important;
+}
+
+@media (max-width: 576px) {
+  #services-menu-item.mega-2-items {
+    width: auto !important;
+    transform: translatex(0%);
+    margin-left: auto !important;
+  }
+}
+
+.image-wrapper.bg-overlay-400:before {
+  background: rgb(8 25 26 / 70%);
+}

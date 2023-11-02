@@ -1,0 +1,129 @@
+{% extends 'website/layouts/master.html' %}
+{% load static %}
+{% load thumbnail %}
+
+{% block style %}
+
+<style>
+  .image-wrapper.bg-overlay-400:before {
+    background: rgb(8 25 26 / 70%);
+  }
+</style>
+
+{% endblock style %}
+
+{% block main %}
+
+<section class="wrapper image-wrapper bg-image bg-overlay bg-overlay-400 bg-content text-white" data-image-src="{% static 'sandbox/assets/img/photos/blog.jpg' %}">
+  <div class="container pt-18 pt-md-20 pb-21 pb-md-21 text-center" style="z-index: 5; position:relative">
+    <div class="row">
+      <div class="col-sm-10 col-md-8 col-lg-6 col-xl-6 col-xxl-5 mx-auto">
+        <h1 class="display-1 text-white mb-3">Blog</h1>
+        <p class="lead px-xl-10 px-xxl-10">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+      </div>
+      <!-- /column -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container -->
+</section>
+<!-- /section -->
+
+<section class="wrapper bg-light">
+    <div class="container py-14 py-md-16">
+      {% if category_filter %}
+        <div class="row gx-lg-8 gx-xl-12 mb-3">
+          <div class="col-lg-8">
+            <h4 class=""><span style="color: #777;">Filtered by category:</span> {{ category_filter.name }}</h4>
+          </div>
+        </div>
+      {% endif %}
+      {% if tag_filter %}
+        <div class="row gx-lg-8 gx-xl-12 mb-3">
+          <div class="col-lg-8">
+            <h4 class=""><span style="color: #777;">Filtered by tag:</span> {{ tag_filter.name }}</h4>
+          </div>
+        </div>
+      {% endif %}
+      <div class="row gx-lg-8 gx-xl-12">
+        <div class="col-lg-8">
+          <div class="blog grid grid-view">
+            <div class="row isotope gx-md-8 gy-8 mb-8">
+              {% for post in posts %}
+              <article class="item post col-md-6">
+                <div class="card">
+                  <figure class="card-img-top overlay overlay-1 hover-scale"><a href="{% url 'blog:blog_post' post=post.slug  %}"> <img src="{{ post.image|thumbnail_url:'medium' }}" alt="" /></a>
+                    <figcaption>
+                      <h5 class="from-top mb-0">Read More</h5>
+                    </figcaption>
+                  </figure>
+                  <div class="card-body">
+                    <div class="post-header">
+                      <!-- <div class="post-category text-line">
+                        {% for category in post.categories.all %}
+                          <a href="{% url 'blog:blog_category' category=category.slug %}" class="hover" rel="category">{{ category.name }}</a>
+                        {% endfor %}
+                      </div> -->
+                      <!-- /.post-category -->
+                      <h2 class="post-title h3 mt-1 mb-3"><a class="link-dark" href="{% url 'blog:blog_post' post=post.slug  %}">{{ post.title }}</a></h2>
+                    </div>
+                    <!-- /.post-header -->
+                    <div class="post-content">
+                      <p>{{ post.short_description }}</p>
+                    </div>
+                    <!-- /.post-short-description -->
+                  </div>
+                  <!--/.card-body -->
+                  <div class="card-footer">
+                    <ul class="post-meta d-flex mb-0">
+                      <li class="post-date"><i class="uil uil-calendar-alt"></i><span>{{ post.published_at }}</span></li>
+                      <li class="post-comments"><a><i class="uil uil-comment"></i>{{ post.get_comments_count }}</a></li>
+                    </ul>
+                    <!-- /.post-meta -->
+                  </div>
+                  <!-- /.card-footer -->
+                </div>
+                <!-- /.card -->
+              </article>
+              <!-- /.post -->
+              {% endfor %}
+            </div>
+            <!-- /.row -->
+          </div>
+          <!-- /.blog -->
+          <nav class="d-flex" aria-label="pagination">
+            {% comment "" %}
+            <ul class="pagination">
+              <li class="page-item disabled">
+                <a class="page-link" href="#" aria-label="Previous">
+                  <span aria-hidden="true"><i class="uil uil-arrow-left"></i></span>
+                </a>
+              </li>
+              <li class="page-item active"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                  <span aria-hidden="true"><i class="uil uil-arrow-right"></i></span>
+                </a>
+              </li>
+            </ul>
+            <!-- /.pagination -->
+            {% endcomment %}
+          </nav>
+          <!-- /nav -->
+        </div>
+        <!-- /column -->
+
+        {% include 'blog/sandbox/blog_aside.html' %}
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
+<!-- /section -->
+
+{% endblock main %}

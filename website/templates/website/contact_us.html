@@ -1,0 +1,162 @@
+{% extends 'website/layouts/master.html' %}
+{% load static %}
+
+{% block style %}
+
+<style>
+  .image-wrapper.bg-overlay-400:before {
+    background: rgb(8 25 26 / 70%);
+  }
+</style>
+
+{% endblock style %}
+
+{% block main %}
+
+<section class="wrapper image-wrapper bg-image bg-overlay bg-overlay-400 bg-content text-white" data-image-src="{% static 'sandbox/assets/img/photos/contact_us.jpg' %}">
+  <div class="container pt-18 pt-md-20 pb-21 pb-md-21 text-center" style="z-index: 5; position:relative">
+    <div class="row">
+      <div class="col-sm-10 col-md-8 col-lg-6 col-xl-6 col-xxl-5 mx-auto">
+        <h1 class="display-1 text-white mb-3">Contact Us</h1>
+        <p class="lead px-xl-10 px-xxl-10">Have any questions? Reach out to us from our contact form and we will get back to you shortly.</p>
+      </div>
+      <!-- /column -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container -->
+</section>
+<!-- /section -->
+
+<section class="wrapper bg-light">
+  <div class="container pb-14 pb-md-16">
+    <div class="row">
+      <div class="col mt-n19 mb-16">
+        <div class="card shadow-lg">
+          <div class="row gx-0">
+            <div class="col-lg-6 image-wrapper bg-image bg-cover rounded-top rounded-lg-start d-none d-md-block" data-image-src="{% static 'sandbox/assets/img/photos/tm1.jpg' %}">
+            </div>
+            <!--/column -->
+            <div class="col-lg-6">
+              <div class="p-10 p-md-11 p-lg-13">
+                <h2 class="display-4 mb-3">Let’s Talk</h2>
+                <p class="lead fs-lg">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut condimentum odio,
+                  id varius lacus. Praesent porta dolor ac erat facilisis, id hendrerit felis semper.
+                  Morbi rhoncus ultrices metus congue maximus. Nullam varius aliquet tortor id bibendum.
+                  Send us an email to <a href="mailto:contact@aitourirchessclub.ma">contact@aitourirchessclub.ma</a>.
+                </p>
+              </div>
+              <!--/div -->
+            </div>
+            <!--/column -->
+          </div>
+          <!--/.row -->
+        </div>
+        <!-- /.card -->
+      </div>
+      <!-- /column -->
+    </div>
+    <!-- /.row -->
+    <div class="row">
+      <div class="col-xl-10 mx-auto">
+        <div class="row gy-10 gx-lg-8 gx-xl-12">
+          <div class="col-lg-7">
+            <p class="text-muted"><strong>*</strong> These fields are required.</p>
+            <form class="contact-form needs-validation" action="{% url 'website:contact_us' %}" method="post" novalidate>
+              {% csrf_token %}
+              <div class="messages text-center"></div>
+              <div class="row gx-4">
+                <div class="col-md-6">
+                  <div class="form-floating mb-4">
+                    <input id="form_name" type="text" name="name" class="form-control" placeholder="Jane" required>
+                    <label for="form_name">Full Name *</label>
+                    <div class="invalid-feedback"> Please enter your full name. </div>
+                  </div>
+                </div>
+                <!-- /column -->
+                <div class="col-md-6">
+                  <div class="form-floating mb-4">
+                    <input id="form_email" type="email" name="email" class="form-control" placeholder="jane.doe@example.com" required>
+                    <label for="form_email">Email *</label>
+                    <div class="invalid-feedback"> Please provide a valid email address. </div>
+                  </div>
+                </div>
+                <!-- /column -->
+                <div class="col-12">
+                  <div class="form-floating mb-4">
+                    <textarea id="form_message" name="message" class="form-control" placeholder="Your message" style="height: 150px" required></textarea>
+                    <label for="form_message">Message *</label>
+                    <div class="invalid-feedback"> Please enter your messsage. </div>
+                  </div>
+                </div>
+                <!-- /column -->
+                <div class="col-12">
+                  <button type="submit" class="btn btn-primary rounded-pill btn-send mb-3 g-recaptcha">
+                    <div class="inline btn-loading d-none">
+                      <b><i class="uil uil-square" style="font-size: 20px;"></i></b>
+                    </div>
+                    <span>Send message</span>
+                  </button>
+                </div>
+                <!-- /column -->
+              </div>
+              <!-- /.row -->
+            </form>
+            <!-- /form -->
+          </div>
+          <!--/column -->
+          <div class="col-lg-5">
+            <div class="d-flex flex-row">
+              <div>
+                <div class="icon text-primary fs-28 me-4 mt-n1"> <i class="uil uil-location-pin-alt"></i> </div>
+              </div>
+              <div>
+                <h5 class="mb-1">Address</h5>
+                <address>
+                  Dar Chabab,
+                  <br class="d-xs-none d-sm-none d-md-none" />
+                  Ait Ourir, 42050
+                </address>
+              </div>
+            </div>
+            <div class="d-flex flex-row">
+              <div>
+                <div class="icon text-primary fs-28 me-4 mt-n1"> <i class="uil uil-phone-volume"></i> </div>
+              </div>
+              <div>
+                <h5 class="mb-1">Phone</h5>
+                <a href="tel:+212658804661">(+212) 6 58 80 46 61</a><br /><br />
+              </div>
+            </div>
+            <div class="d-flex flex-row">
+              <div>
+                <div class="icon text-primary fs-28 me-4 mt-n1"> <i class="uil uil-envelope"></i> </div>
+              </div>
+              <div>
+                <h5 class="mb-1">E-mail</h5>
+                <p class="mb-0"><a href="mailto:contact@aitourirchessclub.ma" class="link-body">contact@aitourirchessclub.ma</a></p>
+              </div>
+            </div>
+          </div>
+          <!--/column -->
+        </div>
+        <!--/.row -->
+      </div>
+      <!-- /column -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container -->
+</section>
+<!-- /section -->
+
+<section class="wrapper bg-light">
+  <div class="map">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d849.8872377802434!2d-7.660466730432313!3d31.56399099838713!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda5508bfdc71d4d%3A0x74ac3538987dce03!2sDar%20Chabab!5e0!3m2!1sen!2sma!4v1698918679704!5m2!1sen!2sma" style="width:100%; height: 500px; border:0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+  <!-- /.map -->
+</section>
+<!-- /section -->
+
+{% endblock main %}

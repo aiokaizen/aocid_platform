@@ -1,0 +1,602 @@
+{% extends 'website/layouts/master.html' %}
+{% load static %}
+{% load thumbnail %}
+
+{% block style %}
+<style>
+  .my_column {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  #services-1:hover, #services-1.nav-link.active {
+    background: #fff8ef !important;
+  }
+
+  #services-2:hover, #services-2.nav-link.active {
+    background-color: #eef9f7 !important;
+  }
+
+  #services-3:hover, #services-3.nav-link.active {
+    background-color: #fdf3f4 !important;
+  }
+</style>
+{% endblock style %}
+
+{% block main %}
+
+<!-- Sliders -->
+{% if sliders %}
+<section class="wrapper bg-dark">
+    <div class="swiper-container swiper-hero dots-over" data-margin="0" data-autoplay="true" data-autoplaytime="7000" data-nav="true" data-dots="true" data-items="1">
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          {% for slider in sliders %}
+          {% if slider.alignment == "left"%}
+          <div class="swiper-slide bg-overlay bg-overlay-400 bg-dark bg-image" data-image-src="{{ slider.image|thumbnail_url:"large" }}">
+                <div class="container h-100">
+                  <div class="row h-100">
+                    <div class="col-md-10 offset-md-1 col-lg-7 offset-lg-0 col-xl-6 col-xxl-5 text-center text-lg-start justify-content-center align-self-center align-items-start">
+                      <h2 class="display-1 fs-56 mb-4 text-white animate__animated animate__slideInDown animate__delay-1s">{{ slider.title }}</h2>
+                      <p class="lead fs-23 lh-sm mb-7 text-white animate__animated animate__slideInRight animate__delay-2s">{{ slider.description }}</p>
+                      <div class="animate__animated animate__slideInUp animate__delay-3s">
+                        {% for button in slider.buttons.all %}
+                          {% if button.type == "video" %}
+                          <div class="animate__animated animate__slideInUp animate__delay-3s"><a href="{{ button.action }}" class="btn btn-circle btn-white btn-play ripple mx-auto mb-5" data-glightbox><i class="icn-caret-right"></i></a></div>
+                          {% elif button.type == "internal link" %}
+                          <a href="{{ button.action }}" class="btn btn-lg btn-outline-white rounded-pill">{{ button.title }}</a>
+                          {% elif button.type == "external link" %}
+                          <a href="{{ button.action }}" target="_blank" class="btn btn-lg btn-outline-white rounded-pill">{{ button.title }}</a>
+                          {% endif %}
+                        {% endfor %}
+                      </div>
+                    </div>
+                    <!--/column -->
+                  </div>
+                  <!--/.row -->
+                </div>
+                <!--/.container -->
+          </div>
+          <!--/.swiper-slide -->
+          {% elif slider.alignment == "center"%}
+          <div class="swiper-slide bg-overlay bg-overlay-400 bg-dark bg-image" data-image-src="{{ slider.image|thumbnail_url:"large" }}">
+                <div class="container h-100">
+                  <div class="row h-100">
+                    <div class="col-md-11 col-lg-8 col-xl-7 col-xxl-6 mx-auto text-center justify-content-center align-self-center">
+                      <h2 class="display-1 fs-56 mb-4 text-white animate__animated animate__slideInDown animate__delay-1s">{{ slider.title }}</h2>
+                      <p class="lead fs-23 lh-sm mb-7 text-white animate__animated animate__slideInRight animate__delay-2s">{{ slider.description }}</p>
+                      <div class="animate__animated animate__slideInUp animate__delay-3s">
+                        {% for button in slider.buttons.all %}
+                          {% if button.type == "video" %}
+                          <div class="animate__animated animate__slideInUp animate__delay-3s"><a href="{{ button.action }}" class="btn btn-circle btn-white btn-play ripple mx-auto mb-5" data-glightbox><i class="icn-caret-right"></i></a></div>
+                          {% elif button.type == "internal link" %}
+                          <a href="{{ button.action }}" class="btn btn-lg btn-outline-white rounded-pill">{{ button.title }}</a>
+                          {% elif button.type == "external link" %}
+                          <a href="{{ button.action }}" target="_blank" class="btn btn-lg btn-outline-white rounded-pill">{{ button.title }}</a>
+                          {% endif %}
+                        {% endfor %}
+                      </div>
+                    </div>
+                    <!--/column -->
+                  </div>
+                  <!--/.row -->
+                </div>
+                <!--/.container -->
+          </div>
+          <!--/.swiper-slide -->
+          {% elif slider.alignment == "right"%}
+          <div class="swiper-slide bg-overlay bg-overlay-400 bg-dark bg-image" data-image-src="{{ slider.image|thumbnail_url:"large" }}">
+                <div class="container h-100">
+                  <div class="row h-100">
+                    <div class="col-md-10 offset-md-1 col-lg-7 col-xl-6 offset-lg-5 offset-xl-6 offset-xxl-6 col-xxl-5 text-center text-lg-start justify-content-center align-self-center align-items-start">
+                      <h2 class="display-1 fs-56 mb-4 text-white animate__animated animate__slideInDown animate__delay-1s">{{ slider.title }}</h2>
+                      <p class="lead fs-23 lh-sm mb-7 text-white animate__animated animate__slideInRight animate__delay-2s">{{ slider.description }}</p>
+                      <div class="animate__animated animate__slideInUp animate__delay-3s">
+                        {% for button in slider.buttons.all %}
+                          {% if button.type == "video" %}
+                          <div class="animate__animated animate__slideInUp animate__delay-3s"><a href="{{ button.action }}" class="btn btn-circle btn-white btn-play ripple mx-auto mb-5" data-glightbox><i class="icn-caret-right"></i></a></div>
+                          {% elif button.type == "internal link" %}
+                          <a href="{{ button.action }}" class="btn btn-lg btn-outline-white rounded-pill">{{ button.title }}</a>
+                          {% elif button.type == "external link" %}
+                          <a href="{{ button.action }}" target="_blank" class="btn btn-lg btn-outline-white rounded-pill">{{ button.title }}</a>
+                          {% endif %}
+                        {% endfor %}
+                      </div>
+                    </div>
+                    <!--/column -->
+                  </div>
+                  <!--/.row -->
+                </div>
+                <!--/.container -->
+          </div>
+          <!--/.swiper-slide -->
+          {% endif %}
+          {% endfor %}
+        </div>
+            <!--/.swiper-wrapper -->
+      </div>
+      <!-- /.swiper -->
+    </div>
+    <!-- /.swiper-container -->
+</section>
+<!-- /section -->
+{% endif %}
+
+<!-- A propos + Description -->
+<section class="wrapper bg-light">
+  <div class="container py-14 py-md-16">
+    <div class="row gx-md-8 gy-10 align-items-center">
+      <div class="col-lg-6 offset-lg-1 order-lg-2 position-relative">
+        <figure class="rounded"><img class="img-fluid" src="{% static 'sandbox/assets/img/photos/about27.jpg' %}" srcset="{% static 'sandbox/assets/img/photos/about27@2x.jpg' %}" alt="" /></figure>
+        <div class="card shadow-lg position-absolute d-none d-md-block" style="top: 15%; left: -7%">
+          <div class="card-body py-4 px-5">
+            <div class="d-flex flex-row align-items-center">
+              <div>
+                <img src="{% static 'sandbox/assets/img/icons/solid/cloud-group.svg' %}" class="svg-inject icon-svg icon-svg-sm solid-duo text-grape-green me-3" alt="" />
+              </div>
+              <div>
+                <h3 class="fs-25 counter mb-0 text-nowrap">25000+</h3>
+                <p class="fs-16 lh-sm mb-0 text-nowrap">Happy Clients</p>
+              </div>
+            </div>
+          </div>
+          <!--/.card-body -->
+        </div>
+        <!--/.card -->
+        <div class="card shadow-lg position-absolute text-center d-none d-md-block" style="bottom: 10%; left: -10%;">
+          <div class="card-body p-6">
+            <div class="progressbar semi-circle green mb-3" data-value="80"></div>
+            <h4 class="mb-0">Time Saved</h4>
+          </div>
+          <!--/.card-body -->
+        </div>
+        <!--/.card -->
+      </div>
+      <!--/column -->
+      <div class="col-lg-5">
+        <h2 class="fs-16 text-uppercase text-gradient gradient-1 mb-3">What Makes Us Different?</h2>
+        <h3 class="display-4 mb-4 me-lg-n5">We make spending stress free so you have the perfect control.</h3>
+        <p class="mb-6">Etiam porta sem malesuada magna mollis euismod. Donec ullamcorper nulla non metus auctor fringilla. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Fusce dapibus, tellus ac cursus. Integer posuere erat a ante venenatis dapibus posuere velit.</p>
+        <ul class="icon-list bullet-bg bullet-soft-primary">
+          <li><i class="uil uil-check"></i>Aenean eu leo quam. Pellentesque ornare.</li>
+          <li><i class="uil uil-check"></i>Nullam quis risus eget urna mollis ornare.</li>
+          <li><i class="uil uil-check"></i>Donec id elit non mi porta gravida at eget.</li>
+        </ul>
+      </div>
+      <!--/column -->
+    </div>
+    <!--/.row -->
+  </div>
+  <!-- /.container -->
+</section>
+<!-- /section -->
+
+<!-- Services -->
+<section class="wrapper bg-light">
+  <div class="container py-10 py-md-15">
+    <div class="row">
+      <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2 mx-auto text-center">
+        <h2 class="fs-15 text-uppercase text-muted mb-3">Our Services</h2>
+        <h3 class="display-4 mb-10 px-xl-10 px-xxl-15">Here are some services we offer to our clients.</h3>
+      </div>
+      <!-- /column -->
+    </div>
+    <!-- /.row -->
+    <ul class="nav nav-tabs nav-tabs-bg nav-tabs-shadow-lg d-flex justify-content-between nav-justified flex-lg-row flex-column">
+      <li class="nav-item rounded shadow-lg"> <a class="nav-link d-flex flex-row active" id="services-1" data-bs-toggle="tab" href="#tab2-1">
+          <div><img src="{% static 'sandbox/assets/img/icons/lineal/rocket.svg' %}" class="svg-inject icon-svg icon-svg-md text-yellow me-4" alt="" /></div>
+          <div>
+            <h4 class="mb-1">Easy Usage</h4>
+            <p>Duis mollis commodo luctus cursus commodo tortor mauris.</p>
+          </div>
+        </a> </li>
+      <li class="nav-item rounded shadow-lg"> <a class="nav-link d-flex flex-row" id="services-2" data-bs-toggle="tab" href="#tab2-2">
+          <div><img src="{% static 'sandbox/assets/img/icons/lineal/savings.svg' %}" class="svg-inject icon-svg icon-svg-md text-green me-4" alt="" /></div>
+          <div>
+            <h4 class="mb-1">Fast Transactions</h4>
+            <p>Vivamus sagittis lacus augue fusce dapibus tellus nibh.</p>
+          </div>
+        </a> </li>
+      <li class="nav-item rounded shadow-lg"> <a class="nav-link d-flex flex-row" id="services-3" data-bs-toggle="tab" href="#tab2-3">
+          <div><img src="{% static 'sandbox/assets/img/icons/lineal/shield.svg' %}" class="svg-inject icon-svg icon-svg-md text-red me-4" alt="" /></div>
+          <div>
+            <h4 class="mb-1">Secure Payments</h4>
+            <p>Vestibulum ligula porta felis maecenas faucibus mollis.</p>
+          </div>
+        </a> </li>
+    </ul>
+    <!-- /.nav-tabs -->
+    <div class="tab-content mt-6 mt-lg-8 mb-md-9">
+      <div class="tab-pane fade show active" id="tab2-1">
+        <div class="row gx-lg-8 gx-xl-12 gy-10 align-items-center">
+          <div class="col-lg-6">
+            <div class="row gx-md-5 gy-5 align-items-center">
+              <div class="col-6">
+                <img class="img-fluid rounded shadow-lg d-flex ms-auto" src="{% static 'sandbox/assets/img/photos/sa13.jpg' %}" srcset="{% static '' %}sandbox/assets/img/photos/sa13@2x.jpg 2x" alt="" />
+              </div>
+              <!-- /column -->
+              <div class="col-6">
+                <img class="img-fluid rounded shadow-lg mb-5" src="{% static 'sandbox/assets/img/photos/sa14.jpg' %}" srcset="{% static '' %}sandbox/assets/img/photos/sa14@2x.jpg 2x" alt="" />
+                <img class="img-fluid rounded shadow-lg d-flex col-10" src="{% static 'sandbox/assets/img/photos/sa15.jpg' %}" srcset="{% static '' %}sandbox/assets/img/photos/sa15@2x.jpg 2x" alt="" />
+              </div>
+              <!-- /column -->
+            </div>
+            <!-- /.row -->
+          </div>
+          <!--/column -->
+          <div class="col-lg-6">
+            <h2 class="mb-3">Easy Usage</h2>
+            <p>Etiam porta sem malesuada magna mollis euismod. Donec ullamcorper nulla non metus auctor fringilla. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Nullam quis risus eget urna.</p>
+            <ul class="icon-list bullet-bg bullet-soft-yellow">
+              <li><i class="uil uil-check"></i>Aenean eu leo quam. Pellentesque ornare.</li>
+              <li><i class="uil uil-check"></i>Nullam quis risus eget urna mollis ornare.</li>
+              <li><i class="uil uil-check"></i>Donec id elit non mi porta gravida at eget.</li>
+            </ul>
+            <a href="#" class="btn btn-yellow mt-2">Learn More</a>
+          </div>
+          <!--/column -->
+        </div>
+        <!--/.row -->
+      </div>
+      <!--/.tab-pane -->
+      <div class="tab-pane fade" id="tab2-2">
+        <div class="row gx-lg-8 gx-xl-12 gy-10 align-items-center">
+          <div class="col-lg-6 order-lg-2">
+            <div class="row gx-md-5 gy-5">
+              <div class="col-5">
+                <img class="img-fluid rounded shadow-lg my-5 d-flex ms-auto" src="{% static 'sandbox/assets/img/photos/sa9.jpg' %}" srcset="{% static '' %}sandbox/assets/img/photos/sa9@2x.jpg 2x" alt="" />
+                <img class="img-fluid rounded shadow-lg d-flex col-10 ms-auto" src="{% static 'sandbox/assets/img/photos/sa10.jpg' %}" srcset="{% static '' %}sandbox/assets/img/photos/sa10@2x.jpg 2x" alt="" />
+              </div>
+              <!-- /column -->
+              <div class="col-7">
+                <img class="img-fluid rounded shadow-lg mb-5" src="{% static 'sandbox/assets/img/photos/sa11.jpg' %}" srcset="{% static '' %}sandbox/assets/img/photos/sa11@2x.jpg 2x" alt="" />
+                <img class="img-fluid rounded shadow-lg d-flex col-11" src="{% static 'sandbox/assets/img/photos/sa12.jpg' %}" srcset="{% static '' %}sandbox/assets/img/photos/sa12@2x.jpg 2x" alt="" />
+              </div>
+              <!-- /column -->
+            </div>
+            <!-- /.row -->
+          </div>
+          <!--/column -->
+          <div class="col-lg-6">
+            <h2 class="mb-3">Fast Transactions</h2>
+            <p>Etiam porta sem malesuada magna mollis euismod. Donec ullamcorper nulla non metus auctor fringilla. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Nullam quis risus eget urna.</p>
+            <ul class="icon-list bullet-bg bullet-soft-green">
+              <li><i class="uil uil-check"></i>Aenean eu leo quam. Pellentesque ornare.</li>
+              <li><i class="uil uil-check"></i>Nullam quis risus eget urna mollis ornare.</li>
+              <li><i class="uil uil-check"></i>Donec id elit non mi porta gravida at eget.</li>
+            </ul>
+            <a href="#" class="btn btn-green mt-2">Learn More</a>
+          </div>
+          <!--/column -->
+        </div>
+        <!--/.row -->
+      </div>
+      <!--/.tab-pane -->
+      <div class="tab-pane fade" id="tab2-3">
+        <div class="row gx-lg-8 gx-xl-12 gy-10 align-items-center">
+          <div class="col-lg-6">
+            <div class="row gx-md-5 gy-5">
+              <div class="col-6">
+                <img class="img-fluid rounded shadow-lg mb-5" src="{% static 'sandbox/assets/img/photos/sa5.jpg' %}" srcset="{% static '' %}sandbox/assets/img/photos/sa5@2x.jpg 2x" alt="" />
+                <img class="img-fluid rounded shadow-lg d-flex col-10 ms-auto" src="{% static 'sandbox/assets/img/photos/sa6.jpg' %}" srcset="{% static '' %}sandbox/assets/img/photos/sa6@2x.jpg 2x" alt="" />
+              </div>
+              <!-- /column -->
+              <div class="col-6">
+                <img class="img-fluid rounded shadow-lg my-5" src="{% static 'sandbox/assets/img/photos/sa7.jpg' %}" srcset="{% static '' %}sandbox/assets/img/photos/sa7@2x.jpg 2x" alt="" />
+                <img class="img-fluid rounded shadow-lg d-flex col-10" src="{% static 'sandbox/assets/img/photos/sa8.jpg' %}" srcset="{% static '' %}sandbox/assets/img/photos/sa8@2x.jpg 2x" alt="" />
+              </div>
+              <!-- /column -->
+            </div>
+            <!-- /.row -->
+          </div>
+          <!--/column -->
+          <div class="col-lg-6">
+            <h2 class="mb-3">Secure Payments</h2>
+            <p>Etiam porta sem malesuada magna mollis euismod. Donec ullamcorper nulla non metus auctor fringilla. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Nullam quis risus eget urna.</p>
+            <ul class="icon-list bullet-bg bullet-soft-red">
+              <li><i class="uil uil-check"></i>Aenean eu leo quam. Pellentesque ornare.</li>
+              <li><i class="uil uil-check"></i>Nullam quis risus eget urna mollis ornare.</li>
+              <li><i class="uil uil-check"></i>Donec id elit non mi porta gravida at eget.</li>
+            </ul>
+            <a href="#" class="btn btn-red mt-2">Learn More</a>
+          </div>
+          <!--/column -->
+        </div>
+        <!--/.row -->
+      </div>
+      <!--/.tab-pane -->
+    </div>
+    <!-- /.tab-content -->
+  </div>
+  <!-- /.container -->
+</section>
+<!-- /section -->
+
+<!-- Projects -->
+<section class="wrapper bg-light">
+  <div class="container py-14 py-md-16">
+    <div class="row">
+      <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2 text-center">
+        <h2 class="fs-15 text-uppercase text-muted mb-3">Our Projects</h2>
+        <h3 class="display-4 mb-10 px-xl-10 px-xxl-15">Check out some of our awesome projects with creative ideas.</h3>
+      </div>
+      <!-- /column -->
+    </div>
+    <!-- /.row -->
+
+    <div class="grid grid-view projects-masonry">
+      <div class="isotope-filter filter mb-10 text-center">
+        <ul>
+          <li><a class="filter-item active" data-filter="*">All</a></li>
+          {% for category in categories %}
+          <li><a class="filter-item active" data-filter=".{{ category.slug }}">{{ category.name }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="row gx-md-8 gy-10 gy-md-13 isotope">
+        {% for project in projects %}
+        <div class="project item col-md-6 col-xl-4 {{ project.category.slug }}">
+          <figure class="lift rounded mb-6"><a href="./single-project.html"> <img src="{{ project.image|thumbnail_url:"medium" }}" alt="" /></a></figure>
+          <div class="project-details d-flex justify-content-center flex-column">
+            <div class="post-header">
+              <div class="post-category text-line mb-3 text-purple">{{ project.category.name }}</div>
+              <h2 class="post-title h3">{{ project.short_description }}</h2>
+            </div>
+            <!-- /.post-header -->
+          </div>
+          <!-- /.project-details -->
+        </div>
+        <!-- /.project -->
+        {% endfor %}
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.grid -->
+  </div>
+  <!-- /.container -->
+</section>
+<!-- /section -->
+
+<!-- Counters -->
+{% if counters %}
+<section class="wrapper angled lower-start">
+    <div class="container py-14 py-md-16">
+      <div class="row">
+        <div class="col-xl-10 mx-auto">
+          <div class="row align-items-center counter-wrapper gy-6 text-center">
+            {% for counter in counters %}
+            <div class="col-md-3">
+              <img src="{{ counter.icon.url }}" class="svg-inject icon-svg icon-svg-lg text-primary mb-3" alt="{{ counter.title }}" />
+              <h3 class="counter">{{ counter.count_to }}</h3>
+              <p>{{ counter.title }}</p>
+            </div>
+            {% endfor %}
+            <!--/column -->
+          </div>
+          <!--/.row -->
+        </div>
+        <!-- /column -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
+<!-- /section -->
+{% endif %}
+
+<!-- Testimonials -->
+<section class="wrapper bg-light">
+  <div class="container py-14 py-md-16">
+    <div class="row">
+      <div class="col-md-10 col-lg-8 mx-auto">
+        <div class="swiper-container dots-closer text-center mb-6" data-autoplay="true" data-margin="30" data-dots="true">
+          <div class="swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <span class="ratings five mb-3"></span>
+                <blockquote class="border-0 fs-lg">
+                  <p>“Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Vestibulum ligula porta felis euismod semper. Cras justo odio consectetur adipiscing dapibus.”</p>
+                  <div class="blockquote-details justify-content-center">
+                    <img class="rounded-circle w-12" src="{% static 'sandbox/assets/img/avatars/te1.jpg' %}" srcset="./assets/img/avatars/te1@2x.jpg 2x" alt="" />
+                    <div class="info">
+                      <h5 class="mb-1">Coriss Ambady</h5>
+                      <p class="mb-0">Financial Analyst</p>
+                    </div>
+                  </div>
+                </blockquote>
+              </div>
+              <!--/.swiper-slide -->
+              <div class="swiper-slide">
+                <span class="ratings two mb-3"></span>
+                <blockquote class="border-0 fs-lg">
+                  <p>“Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Vestibulum ligula porta felis euismod semper. Cras justo odio consectetur adipiscing dapibus.”</p>
+                  <div class="blockquote-details justify-content-center">
+                    <img class="rounded-circle w-12" src="{% static 'sandbox/assets/img/avatars/te2.jpg' %}" srcset="./assets/img/avatars/te2@2x.jpg 2x" alt="" />
+                    <div class="info">
+                      <h5 class="mb-1">Cory Zamora</h5>
+                      <p class="mb-0">Marketing Specialist</p>
+                    </div>
+                  </div>
+                </blockquote>
+              </div>
+              <!--/.swiper-slide -->
+              <div class="swiper-slide">
+                <span class="ratings three mb-3"></span>
+                <blockquote class="border-0 fs-lg">
+                  <p>“Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Vestibulum ligula porta felis euismod semper. Cras justo odio consectetur adipiscing dapibus.”</p>
+                  <div class="blockquote-details justify-content-center">
+                    <img class="rounded-circle w-12" src="{% static 'sandbox/assets/img/avatars/te3.jpg' %}" srcset="./assets/img/avatars/te3@2x.jpg 2x" alt="" />
+                    <div class="info">
+                      <h5 class="mb-1">Nikolas Brooten</h5>
+                      <p class="mb-0">Sales Manager</p>
+                    </div>
+                  </div>
+                </blockquote>
+              </div>
+              <!--/.swiper-slide -->
+            </div>
+            <!--/.swiper-wrapper -->
+          </div>
+          <!-- /.swiper -->
+        </div>
+        <!-- /.swiper-container -->
+      </div>
+      <!-- /column -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container -->
+</section>
+<!-- /section -->
+
+<!-- Clients -->
+<section class="wrapper bg-light wrapper-border">
+  <div class="container py-14 py-md-16">
+    <h2 class="fs-15 text-uppercase text-muted text-center mb-8">Trusted by Over 5000 Clients</h2>
+    <div class="swiper-container clients mb-0" data-margin="30" data-dots="false" data-autoplay-timeout="1000" data-speed="1000" data-autoplay="true" data-loop="true" data-items-xxl="7" data-items-xl="6" data-items-lg="5" data-items-md="4" data-items-xs="2">
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide px-5"><img src="{% static 'sandbox/assets/img/brands/c1.png' %}" alt="" /></div>
+          <div class="swiper-slide px-5"><img src="{% static 'sandbox/assets/img/brands/c2.png' %}" alt="" /></div>
+          <div class="swiper-slide px-5"><img src="{% static 'sandbox/assets/img/brands/c3.png' %}" alt="" /></div>
+          <div class="swiper-slide px-5"><img src="{% static 'sandbox/assets/img/brands/c4.png' %}" alt="" /></div>
+          <div class="swiper-slide px-5"><img src="{% static 'sandbox/assets/img/brands/c5.png' %}" alt="" /></div>
+          <div class="swiper-slide px-5"><img src="{% static 'sandbox/assets/img/brands/c6.png' %}" alt="" /></div>
+          <div class="swiper-slide px-5"><img src="{% static 'sandbox/assets/img/brands/c7.png' %}" alt="" /></div>
+          <div class="swiper-slide px-5"><img src="{% static 'sandbox/assets/img/brands/c8.png' %}" alt="" /></div>
+          <div class="swiper-slide px-5"><img src="{% static 'sandbox/assets/img/brands/c9.png' %}" alt="" /></div>
+          <div class="swiper-slide px-5"><img src="{% static 'sandbox/assets/img/brands/c10.png' %}" alt="" /></div>
+          <div class="swiper-slide px-5"><img src="{% static 'sandbox/assets/img/brands/c11.png' %}" alt="" /></div>
+        </div>
+        <!--/.swiper-wrapper -->
+      </div>
+      <!-- /.swiper -->
+    </div>
+    <!-- /.swiper-container -->
+  </div>
+  <!-- /.container -->
+</section>
+<!-- /section -->
+
+<!-- Convinced Yet ? -->
+<section class="wrapper bg-light">
+    <div class="container pt-19 pb-14 pt-md-20 pb-md-16">
+      <div class="row gx-md-8 gx-xl-12 gy-10 align-items-center">
+        <div class="col-md-8 col-lg-6 offset-lg-0 col-xl-5 offset-xl-1 position-relative">
+          <div class="shape bg-dot primary rellax w-17 h-21" data-rellax-speed="1" style="top: -2rem; left: -1.4rem;"></div>
+          <figure class="rounded"><img src="{% static 'sandbox/assets/img/photos/about4.jpg' %}" srcset="{% static 'sandbox/assets/img/photos/about4@2x.jpg' %}" alt=""></figure>
+        </div>
+        <!--/column -->
+        <div class="col-lg-6">
+          <img src="{% static 'sandbox/assets/img/icons/lineal/telemarketer.svg' %}" class="svg-inject icon-svg icon-svg-md mb-4" alt="" />
+          <h2 class="display-4 mb-8">Convinced yet? Let's make something great together.</h2>
+          <div class="d-flex flex-row">
+            <div>
+              <div class="icon text-primary fs-28 me-6 mt-n1"> <i class="uil uil-location-pin-alt"></i> </div>
+            </div>
+            <div>
+              <h5 class="mb-1">Address</h5>
+              <address> 2ème étage, Lotissement Almassar, 295 <br class="d-xs-none d-sm-none d-md-block" /> Marrakech, 40100 </address>
+            </div>
+          </div>
+          <div class="d-flex flex-row">
+            <div>
+              <div class="icon text-primary fs-28 me-6 mt-n1"> <i class="uil uil-phone-volume"></i> </div>
+            </div>
+            <div>
+              <h5 class="mb-1">Phone</h5>
+              <p><a href="tel:+212808697208" class="link-body">(+212) 8 08 69 72 08</a></p>
+            </div>
+          </div>
+          <div class="d-flex flex-row">
+            <div>
+              <div class="icon text-primary fs-28 me-6 mt-n1"> <i class="uil uil-envelope"></i> </div>
+            </div>
+            <div>
+              <h5 class="mb-1">E-mail</h5>
+              <p class="mb-0"><a href="mailto:contact@ekblocks.com" class="link-body">contact@ekblocks.com</a></p>
+            </div>
+          </div>
+        </div>
+        <!--/column -->
+      </div>
+      <!--/.row -->
+    </div>
+    <!-- /.container -->
+</section>
+<!-- /section -->
+
+<!-- Latest Posts -->
+<section class="wrapper bg-white">
+  <div class="container py-14 py-md-16">
+    <div class="row">
+      <div class="col-lg-9 col-xl-8 col-xxl-7 mx-auto">
+        <h2 class="fs-15 text-uppercase text-primary text-center">Our latest posts</h2>
+        <h3 class="display-4 mb-6 text-center">Here are the latest company news from our blog that got the most attention.</h3>
+      </div>
+      <!-- /column -->
+    </div>
+    <!-- /.row -->
+    <div class="position-relative">
+      <div class="shape bg-dot primary rellax w-17 h-20" data-rellax-speed="1" style="top: 0; left: -1.7rem;"></div>
+      <div class="swiper-container dots-closer blog grid-view mb-6" data-margin="0" data-dots="true" data-items-xl="3" data-items-md="2" data-items-xs="1">
+        <div class="swiper">
+          <div class="row">
+            {% for post in posts %}
+            <div class="my_column col-xl-4 col-lg-4 col-md-6 col-sm-12">
+              <div class="item-inner my_column">
+                <article>
+                  <div class="card">
+                    <figure class="card-img-top overlay overlay-1 hover-scale"><a href="{% url 'blog:blog_post' post=post.slug %}"> <img src="{{ post.image|thumbnail_url:'medium' }}" alt="" /></a>
+                      <figcaption>
+                        <h5 class="from-top mb-0">Read More</h5>
+                      </figcaption>
+                    </figure>
+                    <div class="card-body">
+                      <div class="post-header">
+                        <div class="post-category text-line">
+                          {% for category in post.categories.all %}
+                            <a href="{% url 'blog:blog_category' category=post.category.slug %}" class="hover" rel="category">{{ post.category }}</a>
+                          {% endfor %}
+                        </div>
+                        <!-- /.post-category -->
+                        <h2 class="post-title h3 mt-1 mb-3"><a class="link-dark" href="{% url 'blog:blog_post' post=post.slug %}">{{ post.title }}</a></h2>
+                      </div>
+                      <!-- /.post-header -->
+                      <div class="post-content">
+                        <p>{{ post.short_description }}</p>
+                      </div>
+                      <!-- /.post-content -->
+                    </div>
+                    <!--/.card-body -->
+                    <div class="card-footer">
+                      <ul class="post-meta d-flex mb-0">
+                        <li class="post-date"><i class="uil uil-calendar-alt"></i><span>{{ post.published_at }}</span></li>
+                        <li class="post-comments"><a><i class="uil uil-comment"></i>{{ post.get_comments_num }}</a></li>
+                      </ul>
+                      <!-- /.post-meta -->
+                    </div>
+                    <!-- /.card-footer -->
+                  </div>
+                  <!-- /.card -->
+                </article>
+                <!-- /article -->
+              </div>
+              <!-- /.item-inner -->
+            </div>
+            <!--/.swiper-slide -->
+            {% endfor %}
+          </div>
+          <!--/.swiper-wrapper -->
+        </div>
+        <!-- /.swiper -->
+      </div>
+      <!-- /.swiper-container -->
+    </div>
+    <!-- /.position-relative -->
+  </div>
+  <!-- /.container -->
+</section>
+<!-- /section -->
+
+{% endblock main %}

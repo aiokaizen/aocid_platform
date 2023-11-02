@@ -1,0 +1,9 @@
+Django==4.2
+easy-thumbnails==2.8.5
+django-admin-interface==0.26.1
+django-colorfield==0.10.1
+python-slugify==8.0.1
+django-ckeditor==6.7.0
+django-image-cropping==1.7
+Pillow==10.1.0
+django-autoslug==1.9.9
