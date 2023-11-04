@@ -80,6 +80,7 @@ class NewsLetter(models.Model):
 
         if "update_fields" in kwargs and "emails" in kwargs["update_fields"]:
             self.json_emails = self.emails.replace("\r\n", "\n").split("\n")
+            kwargs["update_fields"].append("json_emails")
         super().save(*args, **kwargs)
 
     def __str__(self):
