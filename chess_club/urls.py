@@ -19,7 +19,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    path('aoccadmin/', admin.site.urls),
+    path('aocidadmin/', admin.site.urls),
     path("blog/", include("blog.urls")),
     path("", include("website.urls")),
 ]
