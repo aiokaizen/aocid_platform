@@ -55,10 +55,10 @@ class Club(models.Model):
         from club.models import Payment, Expense
         total_payments = Payment.objects.aggregate(
             total_payments=models.Sum("amount")
-        )["total_payments"]
+        )["total_payments"] or 0
         total_expenses = Expense.objects.aggregate(
             total_expenses=models.Sum("amount")
-        )["total_expenses"]
+        )["total_expenses"] or 0
 
         new_sold = total_payments - total_expenses
         self.sold = new_sold
