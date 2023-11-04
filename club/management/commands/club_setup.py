@@ -10,6 +10,7 @@ from django.contrib.auth.models import (
 
 from club.constants import SYSTEM_GROUPS
 from club.models import Club
+from website.models import NewsLetter
 
 
 base_permissions = [
@@ -73,6 +74,15 @@ class Command(BaseCommand):
                 name="AOCID"
             )
             club.save()
+
+        try:
+            newsletter = NewsLetter.objects.get(slug="footer_newsletter")
+        except NewsLetter.DoesNotExist:
+            newsletter = NewsLetter(
+                name="Footer newsletter",
+                slug="footer_newsletter"
+            )
+            newsletter.save()
 
         # Reset permissions:
         reset_perms = options["reset_perms"]
@@ -209,7 +219,7 @@ class Command(BaseCommand):
                 "button",
                 # "counter",
                 "message",
-                # "newsLetter",
+                "newsletter",
             ],
         )
         group_content_manager.permissions.set(content_manager_perms)
@@ -222,22 +232,3 @@ class Command(BaseCommand):
             ],
         )
         group_technician.permissions.set(technician_perms)
-
-        # Users
-        """
-            + Hicham Lemcherfi
-                - l.hicham
-                - hichamadm_pass
-
-            + Ferdaous Faris
-                - f.ferdaous
-                - ferdaousadm_pass
-
-            + AbdErrahim Ait Ouaarab
-                - a.abderrahim
-                - abderrahimadmin_pass
-
-            + Youssef Oubouali
-                - o.youssef
-                - youssefadm_pass
-        """

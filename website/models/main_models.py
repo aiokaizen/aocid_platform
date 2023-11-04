@@ -67,20 +67,31 @@ class NewsLetter(models.Model):
         verbose_name_plural = _("NewsLetters")
 
     name = models.CharField(_("Nom"), max_length=256)
-    emails = models.JSONField(_("Liste des e-mails"), default=list)
+    slug = AutoSlugField(unique=True)
+    emails = models.TextField(
+        _("Liste des e-mails"), default="", blank=True,
+        help_text=_("Une adresse email par ligne.")
+    )
+    json_emails = models.JSONField("Emails list", default=list)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = self.name
+        super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.name} ({len(self.emails)} emails)"
+        return f"{self.name} ({len(self.json_emails)} emails)"
 
     def add_email(self, email):
-        if not self.emails:
-            self.emails = []
+        if not self.json_emails:
+            self.json_emails = []
 
         try:
             validate_email(email)
 
-            self.emails.append(email)
-            self.save(update_fields=["emails"])
+            self.json_emails.append(email)
+            self.emails += f"{email}\n"
+            self.save(update_fields=["emails", "json_emails"])
             return {
                 "result": "success",
                 "message": _("L'adresse email est ajoutée avec succès.")

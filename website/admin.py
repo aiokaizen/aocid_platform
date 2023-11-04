@@ -36,7 +36,7 @@ class CounterAdmin(admin.ModelAdmin):
 
 @admin.register(NewsLetter)
 class NewsLetterAdmin(admin.ModelAdmin):
-    list_display = ["name"]
+    list_display = ["__str__"]
     fields = ["name", "emails"]
 
 

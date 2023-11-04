@@ -7,7 +7,7 @@ from django.views import View
 from django.http.response import JsonResponse
 from django.contrib import messages
 
-from website.forms import MessageForm, NewsLetterForm, ApplicationForm
+from website.forms import MessageForm, AddEmailForm, ApplicationForm
 from website.models import Counter, Slide
 from website.models import *
 
@@ -51,13 +51,15 @@ class Home(View):
 
     def post(self, request):
 
-        form = NewsLetterForm(request.POST)
+        form = AddEmailForm(request.POST)
         if form.is_valid():
-            form.save()
-            message = _("Your email has saved successfully")
+            newsletter_slug = request.POST.get("newsletter", "#NOT_PROVIDED")
+            newsletter = get_object_or_404(NewsLetter, slug=newsletter_slug)
+            newsletter.add_email(email=form.cleaned_data["email"])
+            message = _("Votre email est ajouté avec succès.")
             success = True
         else:
-            message = _("Your email is not valid")
+            message = _("Votre email est invalid!")
             success = False
 
         return JsonResponse({"success": success, "message": message})

@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.translation import gettext_lazy as _
 
 from website.models import Message, NewsLetter, Application
 
@@ -13,17 +14,14 @@ class MessageForm(forms.ModelForm):
         return self.instance
 
 
-class NewsLetterForm(forms.ModelForm):
-    class Meta:
-        model = NewsLetter
-        fields = [
-            "name",
-            "emails"
-        ]
+class AddEmailForm(forms.Form):
 
-    def save(self, *args, **kwargs):
-        self.instance.create()
-        return self.instance
+    email = forms.EmailField(label=_("Email"))
+
+    class Meta:
+        fields = [
+            "email"
+        ]
 
 
 class ApplicationForm(forms.ModelForm):
