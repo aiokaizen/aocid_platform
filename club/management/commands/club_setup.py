@@ -161,7 +161,9 @@ class Command(BaseCommand):
             ],
             exclude_codenames=[
                 "add_club",
-                "delete_club"
+                "delete_club",
+                "view_club",
+                "change_club",
             ]
         )
         group_board_manager.permissions.set(board_manager_perms)
@@ -175,7 +177,9 @@ class Command(BaseCommand):
             ],
             exclude_codenames=[
                 "add_club",
-                "delete_club"
+                "delete_club",
+                "view_club",
+                "change_club",
             ]
         )
         group_finance_manager.permissions.set(finance_manager_perms)
