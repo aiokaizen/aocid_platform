@@ -100,10 +100,6 @@ class Command(BaseCommand):
                     codename = f"{perm}_{opts.model_name}"
                     name = f"Can {perm} {opts.verbose_name}"
 
-                    if "club" in codename:
-                        print("codename:", codename)
-                        print("name:", name)
-
                     Permission.objects.get_or_create(
                         codename=codename,
                         content_type=content_type,
@@ -190,7 +186,8 @@ class Command(BaseCommand):
                 "subscription"
                 "family",
                 "guardian",
-                "player"
+                "player",
+                "session",
             ],
         )
         group_subscriptions_manager.permissions.set(subscriptions_manager_perms)
