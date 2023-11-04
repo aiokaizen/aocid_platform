@@ -18,7 +18,8 @@ from club.utils import (
     get_club_logo_filename,
     current_year,
     get_model_file_filename,
-    get_book_file_filename
+    get_book_file_filename,
+    get_now_plus_one_hour
 )
 
 
@@ -209,3 +210,35 @@ class Media(models.Model):
 
     def __str__(self):
         return self.title or self.photo.name
+
+
+class Session(models.Model):
+
+    class Meta:
+        verbose_name = _("Seance")
+        verbose_name_plural = _("Seances")
+        ordering = ('-start_date', '-end_date')
+
+    plan = models.ForeignKey(
+        Plan, verbose_name=_("Abonnement"), on_delete=models.PROTECT,
+        null=True, blank=True
+    )
+    start_date = models.DateTimeField(
+        _("Date et heure de départ"), default=timezone.now
+    )
+    end_date = models.DateTimeField(
+        _("Date et heure de fin"), default=get_now_plus_one_hour
+    )
+    absence_list = models.ManyToManyField(
+        Player, verbose_name=_("Liste des absences"), blank=True
+    )
+
+    def __str__(self):
+        start = self.start_date.strftime("%Hh%M")
+        end = self.end_date.strftime("%Hh%M")
+        date = self.start_date.strftime("%d %B %Y")
+        return gettext("Seance du %(date)s, de %(start)s à %(end)s" % {
+            "date": date,
+            "start": start,
+            "end": end
+        })

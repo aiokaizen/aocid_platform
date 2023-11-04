@@ -1,4 +1,5 @@
 import os
+from datetime import timedelta
 
 from django.utils import timezone
 from django.utils.text import slugify
@@ -6,6 +7,10 @@ from django.utils.text import slugify
 
 def current_year():
     return timezone.now().year
+
+
+def get_now_plus_one_hour():
+    return timezone.now() + timedelta(hours=1)
 
 
 def get_model_file_filename(instance, filename):

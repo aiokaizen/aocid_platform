@@ -5,7 +5,7 @@ from club.models import (
     Insurance, Committee,
     Member, CommitteeMember, Player, Guardian,
     Payment, Expense, Family,
-    Book, Album, Media
+    Book, Album, Media, Session
 )
 
 
@@ -96,3 +96,8 @@ class AlbumAdmin(admin.ModelAdmin):
 @admin.register(Media)
 class MediaAdmin(admin.ModelAdmin):
     pass
+
+
+@admin.register(Session)
+class SessionAdmin(admin.ModelAdmin):
+    filter_horizontal = ('absence_list',)
