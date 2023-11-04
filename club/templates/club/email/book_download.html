@@ -1,15 +1,21 @@
 {% load static %}
 {% load i18n %}
 
-<div class="content-wrapper" style="width: 100%">
+<div class="content-wrapper" style="
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #16123a;
+    color: white;
+">
 
     <div class="center" style="width: 100%;">
+        <div style="display: inline-block; width: 150px;"></div>
         <img
             src="{{ base_url }}{% static 'sandbox/assets/img/logo/logo.jpeg' %}"
             alt="AOCID Logo"
-            style="width: 200px; margin: 0 auto;">
+            style="width: 200px;">
 
-        <h1 style="text-align: center; color: #16123a">
+        <h1 style="text-align: center; color: #F5DD5D">
             {% trans 'Votre téléchargement est prêt' %}
         </h1>
     </div>
