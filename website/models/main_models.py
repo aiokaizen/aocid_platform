@@ -78,9 +78,9 @@ class NewsLetter(models.Model):
         if not self.slug:
             self.slug = self.name
 
-        if "update_fields" in kwargs and "emails" in kwargs["update_fields"]:
-            self.json_emails = self.emails.replace("\r\n", "\n").split("\n")
-            kwargs["update_fields"].append("json_emails")
+        old_obj = NewsLetter.objects.filter(pk=self.pk or 0).first()
+        if old_obj and old_obj.emails != self.emails:
+            self.json_emails = self.emails.replace("\r\n", "\n").split("\n") if self.emails else []
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -95,7 +95,7 @@ class NewsLetter(models.Model):
 
             self.json_emails.append(email)
             self.emails += f"{email}\n"
-            self.save(update_fields=["emails", "json_emails"])
+            super().save(update_fields=["emails", "json_emails"])
             return {
                 "result": "success",
                 "message": _("L'adresse email est ajoutée avec succès.")
