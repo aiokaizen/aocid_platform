@@ -12,6 +12,7 @@ class Payment(models.Model):
         ("subscription_payment", _("Paiement d'adhésion")),
         ("insurance_payment", _("Paiement d'assurance")),
         ("donation", _("Un don")),
+        ("other", _("Autre")),
     )
 
     class Meta:
@@ -35,6 +36,8 @@ class Payment(models.Model):
         verbose_name=_("Adhérant")
     )
     donator = models.CharField(_("Donneur / Donneuse"), max_length=64, blank=True)
+    reason = models.CharField(_("Motif"), max_length=256, blank=True, default="")
+    anonyme = models.BooleanField(_("Anonyme"), default=False)
     payment_date = models.DateTimeField(_("Date de paiement"), auto_now_add=True)
 
     def __str__(self):

@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
 
@@ -7,7 +8,7 @@ PERIOD_CHOICES = (
 )
 
 
-MEMBER_ROLE_CHOICES = (
+MEMBER_ROLE_CHOICES = getattr(settings, "MEMBER_ROLE_CHOICES", (
     ("member", _("Membre")),
     ("executive_director", _("Directeur exécutif")),
     ("board_of_directors", _("Conseil d'administration")),
@@ -19,7 +20,14 @@ MEMBER_ROLE_CHOICES = (
     ("grant_writer", _("Rédacteur / Rédactrice de subventions")),
     ("administrative_assistant", _("Assistant administratif / Assistante administrative")),
     ("advocacy_policy_specialist", _("Spécialiste de la sensibilisation et de la politique")),
-)
+))
+
+
+COMMITTEE_MEMBER_ROLE_CHOICES = getattr(settings, "COMMITTEE_MEMBER_ROLE_CHOICES", (
+    ("director", _("Directeur de comité")),
+    ("member", _("Membre de comité")),
+    ("active_member", _("Membre actif de comité")),
+))
 
 
 COUNTRIES = (
@@ -219,6 +227,7 @@ COUNTRIES = (
     ("Zambia", "Zambia"),
     ("Zimbabwe", "Zimbabwe"),
 )
+
 
 MOROCCAN_CITIES = (
     ("city", "city"),

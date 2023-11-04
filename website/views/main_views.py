@@ -1,14 +1,21 @@
 import logging
+
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.translation import gettext_lazy as _
 from django.views import View
 from django.http.response import JsonResponse
+from django.contrib import messages
+
 from website.forms import MessageForm, NewsLetterForm, ApplicationForm
 from website.models import Counter, Slide
-from blog.models import Post
 from website.models import *
-from django.contrib import messages
+
+from blog.models import Post
+
+from club.models import (
+    Book, Album, Media
+)
 
 
 class Home(View):
@@ -32,7 +39,7 @@ class Home(View):
 
         context = {
             "title": _("Home - Ait Ourir Chess Club"),
-            # "current_page": "home",
+            "current_page": "home",
             "counters": counters,
             "sliders": sliders,
             "posts": posts,
@@ -93,6 +100,59 @@ class ContactUs(View):
         return JsonResponse({"success": success, "message": message})
 
 
+class Gallery(View):
+
+    def get(self, request):
+
+        albums = Album.objects.all()
+        images = Media.objects.all()
+
+        context = {
+            "title": _("médiathèque - Ait Ourir Chess Club"),
+            "current_page": "gallery",
+            "albums": albums,
+            "images": images,
+        }
+        return render(request, "website/gallery.html", context)
+
+
+class BiblioChess(View):
+
+    template_name = "website/biblio_chess.html"
+
+    def get(self, request):
+
+        books = Book.objects.all()
+
+        context = {
+            "title": _("Biblio-Chess - Ait Ourir Chess Club"),
+            "current_page": "biblio_chess",
+            "books": books
+        }
+        return render(request, self.template_name, context)
+
+    def post(self, request):
+
+        book_id = request.POST.get("book_id", 0)
+        email = request.POST.get("email", None)
+        book = get_object_or_404(Book, pk=book_id)
+
+        if email is not None:
+            messages.success(request, _("Votre livre a été envoyé vers votre boite email avec succès."))
+            messages.warning(request, email)
+            messages.error(request, book.title, extra_tags="danger")
+        else:
+            messages.error(request, _("Merci de fournir votre email."))
+
+        books = Book.objects.all()
+        context = {
+            "title": _("Biblio-Chess - Ait Ourir Chess Club"),
+            "current_page": "biblio_chess",
+            "books": books
+        }
+        return render(request, self.template_name, context)
+
+
 class Portfolio(View):
 
     def get(self, request):
@@ -104,6 +164,7 @@ class Portfolio(View):
 
         context = {
             "title": _("Portfolio - Ait Ourir Chess Club"),
+            "current_page": "portfolio",
             "last_6_projects": last_6_projects,
             "projects": projects,
         }
@@ -113,7 +174,10 @@ class Portfolio(View):
 class JoinUs(View):
 
     def get(self, request):
-        context = {"title": _("Join Us - Ait Ourir Chess Club")}
+        context = {
+            "title": _("Join Us - Ait Ourir Chess Club"),
+            "current_page": "join_us",
+        }
         return render(request, "website/join_us.html", context)
 
     def post(self, request):
@@ -135,7 +199,10 @@ class JoinUs(View):
 
 class Terms(View):
     def get(self, request, element_id=None):
-        context = {"title": _("Terms - Ait Ourir Chess Club")}
+        context = {
+            "title": _("Terms - Ait Ourir Chess Club"),
+            "current_page": "join_us",
+        }
         return render(request, "website/terms.html", context)
 
 

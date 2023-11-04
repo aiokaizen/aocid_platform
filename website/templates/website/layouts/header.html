@@ -20,19 +20,25 @@
           <div class="offcanvas-body ms-lg-auto d-flex flex-column h-100">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'website:home' %}">Accueil</a>
+                <a class="nav-link {% if current_page == 'home' %}active{% endif %}" href="{% url 'website:home' %}">Accueil</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'website:about_us' %}">A Propos</a>
+                <a class="nav-link {% if current_page == 'about_us' %}active{% endif %}" href="{% url 'website:about_us' %}">A Propos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {% if current_page == 'gallery' %}active{% endif %}" href="{% url 'website:gallery' %}">Médiathèque</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {% if current_page == 'biblio_chess' %}active{% endif %}" href="{% url 'website:biblio_chess' %}">Biblio-Chess</a>
               </li>
               <!-- <li class="nav-item">
-                <a class="nav-link" href="{% url 'website:portfolio' %}">Portfolio</a>
+                <a class="nav-link {% if current_page == 'portfolio' %}active{% endif %}" href="{% url 'website:portfolio' %}">Portfolio</a>
               </li> -->
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'blog:blog' %}">Blog</a>
+                <a class="nav-link {% if current_page == 'blog' %}active{% endif %}" href="{% url 'blog:blog' %}">Blog</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'website:contact_us' %}">Contactez Nous</a>
+                <a class="nav-link {% if current_page == 'contact_us' %}active{% endif %}" href="{% url 'website:contact_us' %}">Contactez Nous</a>
               </li>
             </ul>
             <!-- /.navbar-nav -->

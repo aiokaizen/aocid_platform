@@ -2,6 +2,8 @@ from .main_views import (
     Home,
     AboutUs,
     ContactUs,
+    Gallery,
+    BiblioChess,
     Portfolio,
     JoinUs,
     Terms,

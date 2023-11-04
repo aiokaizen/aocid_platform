@@ -122,6 +122,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
 LANGUAGE_CODE = 'fr-FR'
+LANGUAGE_CODE = 'en-EN'
 
 TIME_ZONE = 'Africa/Casablanca'
 
@@ -148,6 +149,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 THUMBNAIL_ALIASES = {
+    '': {
+        'thumbnail': {'size': (50, 50), 'crop': True},
+    },
     "blog.Post.image": {
         "small": {"size": (100, 100), "crop": True},
         "medium": {"size": (560, 350), "crop": True},
@@ -157,6 +161,7 @@ THUMBNAIL_ALIASES = {
     "blog.Author.avatar": {"small": {"size": (60, 60), "crop": True}},
     "website.Slide.image": {"large": {"size": (2800, 1150)}, "crop": True},
     "projects.Project.image": {"medium": {"size": (630, 410), "crop": True}},
+    "club.Book.image": {"thumbnail": {"size": (250, 250), "crop": True}},
 }
 
 

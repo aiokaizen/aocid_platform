@@ -37,6 +37,7 @@ class Blog(View):
 
         context = {
             "title": _("Blog - Ait Ourir Chess Club"),
+            "current_page": "blog",
             "posts": posts,
             "last_posts": last_posts,
             "categories": categories,
@@ -77,6 +78,7 @@ class BlogPost(View):
 
         context = {
             "title": post.title,
+            "current_page": "blog",
             "post": post,
             "like_also": like_also,
             "comments": comments,

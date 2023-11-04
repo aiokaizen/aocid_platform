@@ -95,7 +95,7 @@ class NewsLetter(models.Model):
 
 class Application(models.Model):
     """
-    Might be used to get requests from people to join our community?
+    Might be used to get requests from people to join our committee?
     """
 
     class Meta:

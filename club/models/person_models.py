@@ -85,11 +85,49 @@ class Person(models.Model):
         return self.full_name
 
 
+class Guardian(Person):
+
+    class Meta:
+        verbose_name = _("Tuteur")
+        verbose_name_plural = _("Tuteurs")
+
+
+class Player(Person):
+
+    class Meta:
+        verbose_name = _("Personne")
+        verbose_name_plural = _("Personnes")
+
+    guardian = models.ForeignKey(
+        Guardian, verbose_name=_("Tuteur"), on_delete=models.PROTECT,
+        null=True, blank=True
+    )
+
+    elo = models.PositiveSmallIntegerField(verbose_name=_("ELO"), null=True, blank=True)
+
+    family = models.ForeignKey(
+        Family, on_delete=models.PROTECT, related_name="members",
+        null=True, blank=True, verbose_name=_("Famille")
+    )
+
+
+class Committee(models.Model):
+
+    class Meta:
+        verbose_name = _("Comité")
+        verbose_name_plural = _("Comités")
+
+    name = models.CharField(_("Nom de la comité"), max_length=256)
+
+    def __str__(self):
+        return self.name
+
+
 class Member(Person):
 
     class Meta:
-        verbose_name = _("Membre")
-        verbose_name_plural = _("Membres")
+        verbose_name = _("Membre exécutif")
+        verbose_name_plural = _("Membres exécutifs")
 
     user = models.ForeignKey(
         User, on_delete=models.PROTECT, null=True, blank=True,
@@ -104,27 +142,27 @@ class Member(Person):
         return f"{self.full_name} - {self.get_role_display()}"
 
 
-class Guardian(Person):
+class CommitteeMember(Person):
 
     class Meta:
-        verbose_name = _("Tuteur")
-        verbose_name_plural = _("Tuteurs")
+        verbose_name = _("Membre de comité")
+        verbose_name_plural = _("Membres de comités")
 
-
-class Player(Person):
-
-    class Meta:
-        verbose_name = _("Joueur")
-        verbose_name_plural = _("Joueurs")
-
-    guardian = models.ForeignKey(
-        Guardian, verbose_name=_("Tuteur"), on_delete=models.PROTECT,
-        null=True, blank=True
+    user = models.ForeignKey(
+        User, on_delete=models.PROTECT, null=True, blank=True,
+        verbose_name=_("Utilisateur associé")
+    )
+    player = models.ForeignKey(
+        Player, on_delete=models.PROTECT, null=True, blank=True,
+        verbose_name=_("Personne")
+    )
+    committee = models.ForeignKey(
+        Committee, on_delete=models.PROTECT, verbose_name=_("Comité")
+    )
+    role = models.CharField(
+        _("Fonction"), max_length=64, default="member",
+        choices=club_settings.COMMITTEE_MEMBER_ROLE_CHOICES
     )
 
-    elo = models.PositiveSmallIntegerField(verbose_name=_("ELO"), null=True, blank=True)
-
-    family = models.ForeignKey(
-        Family, on_delete=models.PROTECT, related_name="members",
-        null=True, blank=True, verbose_name=_("Famille")
-    )
+    def __str__(self):
+        return f"{self.full_name} - {self.get_role_display()}"

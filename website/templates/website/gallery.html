@@ -1,0 +1,50 @@
+{% extends 'website/layouts/master.html' %}
+{% load static %}
+
+
+{% block style %}
+
+{% endblock style %}
+
+{% block main %}
+<section class="wrapper bg-light">
+  <div class="container py-14 py-md-16 text-center">
+    <div class="row">
+      <div class="col-lg-10 col-xl-8 col-xxl-7 mx-auto mb-8">
+        <h2 class="display-5 mb-3">My Selected Shots</h2>
+        <p class="lead fs-lg">Photography is my passion and I love to turn ideas into beautiful things.</p>
+      </div>
+      <!-- /column -->
+    </div>
+    <!-- /.row -->
+    <div class="grid grid-view projects-masonry">
+      <div class="isotope-filter filter mb-10">
+        <ul>
+          <li><a class="filter-item active" data-filter="*">All</a></li>
+          {% for album in albums %}
+            <li><a class="filter-item" data-filter=".{{ album.slug }}">{{ album.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="row gx-md-6 gy-6 isotope">
+        {% for image in images %}
+          <div class="project item col-md-6 col-xl-4 {{ image.album.slug }}">
+            <figure class="overlay overlay-1 rounded">
+              <a href="{{ image.photo.url }}" data-glightbox data-gallery="shots-group">
+                 <img src="{{ image.photo.url }}" alt="{{ image.title }}" />
+              </a>
+              <figcaption>
+                <h5 class="from-top mb-0">{{ image.title }}</h5>
+              </figcaption>
+            </figure>
+          </div>
+        {% endfor %}
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.grid -->
+  </div>
+  <!-- /.container -->
+</section>
+<!-- /section -->
+{% endblock main %}

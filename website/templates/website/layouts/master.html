@@ -24,6 +24,22 @@
     {% include 'website/layouts/header.html' %}
     <!-- /header -->
 
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-icon alert-dismissible fade show mx-3 my-2" role="alert">
+          {% if "success" in message.tags %}
+            <i class="uil uil-check-circle"></i>
+          {% elif "error" in message.tags %}
+            <i class="uil uil-times-circle"></i>
+          {% elif "warning" in message.tags %}
+            <i class="uil uil-exclamation-triangle"></i>
+          {% endif %}
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+    {% endif %}
+
     {% block main %}{% endblock main %}
   </div>
   <!-- /.content-wrapper -->

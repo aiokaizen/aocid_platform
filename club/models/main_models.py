@@ -1,15 +1,18 @@
 from django.db import models
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext_lazy as _, gettext
 from django.utils import timezone
 
 from easy_thumbnails.fields import ThumbnailerImageField
+from autoslug import AutoSlugField
 
 from club import settings as club_settings
 from club.models.person_models import Player, Member
 from club.utils import (
     get_person_photo_filename,
     get_club_logo_filename,
-    current_year
+    current_year,
+    get_model_file_filename,
+    get_book_file_filename
 )
 
 
@@ -102,3 +105,52 @@ class Subscription(models.Model):
 
     def __str__(self):
         return f"{self.player} - {self.plan.name}"
+
+
+class Book(models.Model):
+
+    class Meta:
+        verbose_name = _("Livre")
+        verbose_name_plural = _("Livres")
+
+    image = ThumbnailerImageField(_("Image"), upload_to=get_model_file_filename)
+    title = models.CharField(_("Titre"), max_length=256)
+    book_file = models.FileField(_("Livre"), upload_to=get_book_file_filename)
+    category = models.CharField(_("Catégorie"), max_length=64, default="", blank=True)
+    author = models.CharField(_("Auteur"), max_length=256, default="", blank=True)
+    description = models.TextField(_("Description"), default="", blank=True)
+    date = models.DateField(_("Date de sortie"), null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.title}"
+
+
+class Album(models.Model):
+
+    class Meta:
+        verbose_name = _("Album")
+        verbose_name_plural = _("Albums")
+
+    title = models.CharField(_("Titre"), max_length=256, unique=True)
+    slug = AutoSlugField(populate_from="title", unique=True)
+    date = models.DateField(_("Date d'album"), null=True, blank=True)
+    description = models.TextField(_("Description"), default="", blank=True)
+
+    def __str__(self):
+        return gettext("Album") + " - " + self.title
+
+
+class Media(models.Model):
+
+    class Meta:
+        verbose_name = _("Media")
+        verbose_name_plural = _("Médiathèque")
+
+    photo = ThumbnailerImageField(_("Photo"), upload_to=get_model_file_filename)
+    title = models.CharField(_("Titre"), max_length=256, default="", blank=True)
+    date = models.DateField(_("Date de capture"), null=True, blank=True)
+    description = models.TextField(_("Description"), default="", blank=True)
+    album = models.ForeignKey(Album, on_delete=models.PROTECT, null=True, blank=True)
+
+    def __str__(self):
+        return self.title or self.photo.name
