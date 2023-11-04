@@ -77,6 +77,9 @@ class NewsLetter(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = self.name
+
+        if "update_fields" in kwargs and "emails" in kwargs["update_fields"]:
+            self.json_emails = self.emails.replace("\r\n", "\n").split("\n")
         super().save(*args, **kwargs)
 
     def __str__(self):
