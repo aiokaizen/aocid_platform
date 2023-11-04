@@ -162,7 +162,6 @@ class Command(BaseCommand):
             exclude_codenames=[
                 "add_club",
                 "delete_club",
-                "view_club",
                 "change_club",
             ]
         )
@@ -178,7 +177,6 @@ class Command(BaseCommand):
             exclude_codenames=[
                 "add_club",
                 "delete_club",
-                "view_club",
                 "change_club",
             ]
         )
