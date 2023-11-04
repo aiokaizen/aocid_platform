@@ -15,7 +15,7 @@
         <img
             src="{{ base_url }}{% static 'sandbox/assets/img/logo/logo.jpeg' %}"
             alt="AOCID Logo"
-            style="width: 200px;">
+            style="width: 200px; display: inline;">
 
         <h1 style="text-align: center; color: #F5DD5D">
             {% trans 'Votre téléchargement est prêt' %}
@@ -23,16 +23,16 @@
     </div>
 
     <div>
-        <h3>{% trans 'Merci de trouvez ci-joint votre livre:' %}</h3>
         <h3>
-            {{ book.title }}
+            {% trans 'Merci de trouvez ci-joint votre livre:' %} <br />
+            <span style="color: #F5DD5D">{{ book.title }}</span>
             {% if book.author %}
              {% trans 'par' %} {{ book.author }}
             {% endif %}
         </h3>
     </div>
 
-    <div>
+    <div style="margin-top: 20px;">
         <strong>{% trans "L'équipe" %} AOCID</strong>
     </div>
 
