@@ -85,6 +85,7 @@ class Command(BaseCommand):
                 opts = model._meta
                 content_type = ContentType.objects.get_for_model(model)
 
+                # Create default permissions (From Meta.default_permissions)
                 for perm in opts.default_permissions:
                     codename = f"{perm}_{opts.model_name}"
                     name = f"Can {perm} {opts.verbose_name}"
