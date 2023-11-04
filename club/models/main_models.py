@@ -51,6 +51,19 @@ class Club(models.Model):
 
         return super().save(*args, **kwargs)
 
+    def update_sold(self):
+        from club.models import Payment, Expense
+        total_payments = Payment.objects.aggregate(
+            total_payments=models.Sum("amount")
+        )["total_payments"]
+        total_expenses = Expense.objects.aggregate(
+            total_expenses=models.Sum("amount")
+        )["total_expenses"]
+
+        new_sold = total_payments - total_expenses
+        self.sold = new_sold
+        return self.save(update_fields=["sold"])
+
     @classmethod
     def get_club(cls):
         return cls.objects.first()

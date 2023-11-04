@@ -50,25 +50,9 @@ class Payment(models.Model):
         return f"{self.amount}"
 
     def save(self, *args, **kwargs):
-        club = Club.get_club()
-
-        if not self.id:
-            # New payment
-            club.sold += self.amount
-            club.save()
-            return super().save(*args, **kwargs)
-
-        # Update
-        # Subtract old amount
-        old_self = Payment.objects.get(pk=self.pk)
-        club.sold -= old_self.amount
-
         if self.type_payment == "donation" and not self.donator:
             self.donator = _("Anonyme")
 
-        # Add old amount
-        club.sold += self.amount
-        club.save()
         return super().save(*args, **kwargs)
 
 
@@ -84,22 +68,3 @@ class Expense(models.Model):
 
     def __str__(self):
         return f"{self.amount} - {self.reason}"
-
-    def save(self, *args, **kwargs):
-        club = Club.get_club()
-
-        if not self.id:
-            # New charge
-            club.sold -= self.amount
-            club.save()
-            return super().save(*args, **kwargs)
-
-        # Update
-        # Subtract old amount
-        old_self = Expense.objects.get(pk=self.pk)
-        club.sold += old_self.amount
-
-        # Add old amount
-        club.sold -= self.amount
-        club.save()
-        return super().save(*args, **kwargs)
