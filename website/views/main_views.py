@@ -138,9 +138,12 @@ class BiblioChess(View):
         book = get_object_or_404(Book, pk=book_id)
 
         if email is not None:
-            messages.success(request, _("Votre livre a été envoyé vers votre boite email avec succès."))
-            messages.warning(request, email)
-            messages.error(request, book.title, extra_tags="danger")
+            base_url = request.build_absolute_uri("/")[:-1]
+            success, msg = book.send_by_email(email, base_url)
+            if success is False:
+                messages.error(request, msg, extra_tags="danger")
+            else:
+                messages.success(request, msg)
         else:
             messages.error(request, _("Merci de fournir votre email."))
 

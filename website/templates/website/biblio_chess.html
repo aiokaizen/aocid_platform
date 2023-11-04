@@ -62,7 +62,7 @@
             <div class="col-md-10 offset-md-1">
               <!-- Begin Mailchimp Signup Form -->
               <div id="mc_embed_signup">
-                <form action="{% url 'website:biblio_chess' %}" method="post" id="send_email_form" name="send_email_form" class="validate">
+                <form action="{% url 'website:biblio_chess' %}" method="post" id="send_email_form" name="send_email_form" class="validate" onsubmit="show_loading_screen()">
                   {% csrf_token %}
                   <div id="mc_embed_signup_scroll">
                     <div class="mc-field-group input-group form-floating">

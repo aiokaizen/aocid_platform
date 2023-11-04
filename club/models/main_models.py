@@ -1,6 +1,12 @@
+import os
+
 from django.db import models
 from django.utils.translation import gettext_lazy as _, gettext
 from django.utils import timezone
+from django.core.mail import EmailMultiAlternatives
+from django.conf import settings
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 from easy_thumbnails.fields import ThumbnailerImageField
 from autoslug import AutoSlugField
@@ -123,6 +129,42 @@ class Book(models.Model):
 
     def __str__(self):
         return f"{self.title}"
+
+    def send_by_email(self, recipient, base_url="localhost:8000"):
+        html_template = "club/email/book_download.html"
+        html_body = render_to_string(
+            html_template, {
+                "book": self,
+                "base_url": base_url
+            }
+        )
+        body = strip_tags(html_body)
+        platform_name = getattr(
+            settings,
+            "PLATFORM_NAME",
+            "Ait Ourir Chess and Intelligence development Club (AOCID)"
+        )
+        email = EmailMultiAlternatives(
+            subject=gettext("Votre lien de téléchargement est prêt - ") + f" {platform_name}",
+            body=body,
+            from_email="noreply@ekblocks.com",
+            to=[recipient],
+            headers={"Message-ID": f"download_book_{self.id}"},
+        )
+        email.attach_file(
+            os.path.join(settings.MEDIA_ROOT, self.book_file.name)
+        )
+        email.attach_alternative(html_body, "text/html")
+        try:
+            email.send(
+                fail_silently=False,
+            )
+            return True, _("Votre livre a été envoyé avec succès.")
+        except Exception as e:
+            return False, _(
+                "Erreur d'envoi. Merci de verifier votre adresse email. "
+                "Si elle est valid, prière de réessayer plus tard."
+            )
 
 
 class Album(models.Model):

@@ -1,0 +1,32 @@
+{% load static %}
+{% load i18n %}
+
+<div class="content-wrapper" style="width: 100%">
+
+    <div class="center" style="
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+">
+        <img src="{{ base_url }}{% static 'sandbox/assets/img/logo/logo.jpeg' %}" alt="AOCID Logo">
+        <p>{{ base_url }}{% static 'sandbox/assets/img/logo/logo.jpeg' %}</p>
+        <h1>{% trans 'Votre téléchargement est prêt' %}</h1>
+    </div>
+
+    <div>
+        <h3>{% trans 'Merci de trouvez ci-joint votre livre:' %}</h3>
+        <h3>
+            {{ book.title }}
+            {% if book.author %}
+             {% trans 'par' %} {{ book.author }}
+            {% endif %}
+        </h3>
+    </div>
+
+    <div>
+        <strong>{% trans "L'équipe" %} AOCID</strong>
+    </div>
+
+</div>
