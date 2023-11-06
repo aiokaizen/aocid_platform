@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 SYSTEM_GROUPS = {
     "admin": {
-        "name": _("ADMINISTRATEURS"),
+        "name": _("Administrateurs"),
     },
     "finance_manager": {
         "name": _("Gestionnaire financière")
@@ -12,10 +12,10 @@ SYSTEM_GROUPS = {
         "name": _("Conseil d'administration")
     },
     "committee_manager": {
-        "name": _("Gestionnaire de communauté")
+        "name": _("Gestionnaire de commités")
     },
     "subscriptions_manager": {
-        "name": _("Gestionnaire  d'adhésions")
+        "name": _("Gestionnaire d'adhésions")
     },
     "content_manager": {
         "name": _("Gestionnaire de contenue")

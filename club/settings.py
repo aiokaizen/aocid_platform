@@ -9,24 +9,19 @@ PERIOD_CHOICES = (
 
 
 MEMBER_ROLE_CHOICES = getattr(settings, "MEMBER_ROLE_CHOICES", (
-    ("member", _("Membre")),
-    ("executive_director", _("Directeur exécutif")),
-    ("board_of_directors", _("Conseil d'administration")),
-    ("program_manager", _("Gestionnaire de programme")),
-    ("fundraising_coordinator", _("Coordinateur / Coordinatrice de collecte de fonds")),
-    ("volunteer_coordinator", _("Coordinateur / Coordinatrice de bénévoles")),
-    ("finance_manager", _("Responsable financier / Responsable financière")),
-    ("marketing_communications_manager", _("Responsable marketing et communication")),
-    ("grant_writer", _("Rédacteur / Rédactrice de subventions")),
-    ("administrative_assistant", _("Assistant administratif / Assistante administrative")),
-    ("advocacy_policy_specialist", _("Spécialiste de la sensibilisation et de la politique")),
+    ("president", _("Président")),
+    ("vice_president", _("Vice président")),
+    ("secretary_general", _("Secrétaire générale")),
+    ("vice_secretary_general", _("Vice secrétaire générale")),
+    ("treasurer", _("Trésorier")),
+    ("vice_treasurer", _("Vice trésorier")),
+    ("council_member", _("Conseiller")),
 ))
 
 
 COMMITTEE_MEMBER_ROLE_CHOICES = getattr(settings, "COMMITTEE_MEMBER_ROLE_CHOICES", (
-    ("director", _("Directeur de comité")),
-    ("member", _("Membre de comité")),
-    ("active_member", _("Membre actif de comité")),
+    ("coordinator", _("Coordinateur / Coordinatrice")),
+    ("deputy", _("Adjoint")),
 ))
 
 
