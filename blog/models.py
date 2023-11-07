@@ -1,4 +1,6 @@
 import logging
+import requests
+from hashlib import sha256
 from datetime import datetime, timedelta
 
 from django.db import models
@@ -257,6 +259,29 @@ class Comment(models.Model):
         interval = datetime.now() - timedelta(hours=10)
         old_messages = Comment.objects.filter(id_filters, published_at__gt=interval)
         return old_messages.count() > 10
+
+    def get_gravatar_profile(self):
+        email_hash = sha256(
+            self.email.strip().lower().encode()
+        ).hexdigest()
+
+        # Get avatar only.
+        # result = requests.get(f"https://gravatar.com/avatar/{email_hash}")
+
+        # Get user profile
+        result = requests.get(f"https://gravatar.com/{email_hash}.json")
+
+        if result.status_code != 200:
+            return None
+
+        profile = result.json().get("entry")[0]
+
+        data = {
+            "thumbnail": profile["thumbnailUrl"],
+            "name": profile["displayName"]
+        }
+
+        return data
 
     def can_create_comment(self):
         if self.exceeded_max_comments():

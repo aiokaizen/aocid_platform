@@ -37,7 +37,7 @@ class Slide(models.Model):
         verbose_name = _("Slide")
         verbose_name_plural = _("Slides")
 
-    title = models.CharField(_("Title"), max_length=255)
+    title = models.CharField(_("Title"), max_length=255, blank=True, default="")
     image = ThumbnailerImageField(_("Image"), upload_to="website/sliders/images/")
     description = models.TextField(_("Description"), null=True, blank=True)
     alignment = models.CharField(

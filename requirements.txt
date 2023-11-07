@@ -7,3 +7,4 @@ django-ckeditor==6.7.0
 django-image-cropping==1.7
 Pillow==10.1.0
 django-autoslug==1.9.9
+requests==2.31.0

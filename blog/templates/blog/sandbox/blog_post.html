@@ -187,6 +187,7 @@
                 <h3 class="mb-6">{{ comments|length }} Comments</h3>
                 <ol id="singlecomments" class="commentlist">
                   {% for comment in comments %}
+                  {% with gravatar=comment.get_gravatar_profile %}
                   <li class="comment">
                     <div class="comment-header d-md-flex align-items-center">
                       <div class="d-flex align-items-center">
@@ -194,13 +195,23 @@
                           <figure class="user-avatar">
                             <img class="rounded-circle" alt="" src="{{ comment.user.avatar|thumbnail_url:'small' }}" />
                           </figure>
+                        {% elif gravatar %}
+                          <figure class="user-avatar gravatar">
+                            <img class="rounded-circle" alt="" src="{{ gravatar.thumbnail }}" />
+                          </figure>
                         {% else %}
                           <figure class="user-avatar">
                             <img class="rounded-circle" alt="" src="{% static 'sandbox/assets/img/avatars/generic.jpeg' %}" />
                           </figure>
                         {% endif %}
                         <div>
-                          <h6 class="comment-author"><a href="#" class="link-dark">{{ comment }}</a></h6>
+                          <h6 class="comment-author">
+                            {% if comment.user %}
+                              {{ comment }}
+                            {% else %}
+                              {{ gravatar.name }}
+                            {% endif %}
+                          </h6>
                           <ul class="post-meta">
                             <li><i class="uil uil-calendar-alt"></i>{{ comment.published_at }}</li>
                           </ul>
@@ -219,8 +230,8 @@
                     <!-- /.comment-header -->
                     <p>{{ comment.content }}</p>
                   </li>
+                  {% endwith %}
                   {% endfor %}
-
 
                   {% comment %}
                   <li class="comment">
