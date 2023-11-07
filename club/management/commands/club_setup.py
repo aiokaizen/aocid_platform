@@ -146,7 +146,6 @@ class Command(BaseCommand):
             # All permissions
             exclude_models=[
                 "counter",
-                "newsletter",
             ]
         )
         group_admin.permissions.set(admin_perms)
@@ -155,7 +154,7 @@ class Command(BaseCommand):
             model_in=[
                 "club",
                 "member",
-                "committeemembers",
+                "committeemember",
                 "committee",
                 "player",
             ],
@@ -196,7 +195,7 @@ class Command(BaseCommand):
 
         committee_manager_perms = filter_permissions(
             model_in=[
-                "committeemembers",
+                "committeemember",
                 "committee"
             ],
         )
