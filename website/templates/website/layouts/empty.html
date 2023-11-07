@@ -8,22 +8,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="An impressive and flawless site template that includes various UI elements and countless features, attractive ready-made blocks and rich pages, basically everything you need to create a unique and professional website.">
   <meta name="keywords" content="chess, club, chess club, chess result, chess results, Ait Ourir, Marrakech, learn, learn chess, chess books, ekblocks, Mouad Kommir">
-  <meta name="author" content="EKBlocks">
+  <meta name="author" content="elemis">
   <title>{{ title }}</title>
   <link rel="shortcut icon" href="{% static 'sandbox/assets/img/logo/favicon.jpg' %}">
   <link rel="stylesheet" href="{% static 'sandbox/assets/css/plugins.css' %}">
   <link rel="stylesheet" href="{% static 'sandbox/assets/css/style.css' %}">
   <link rel="stylesheet" href="{% static 'sandbox/assets/css/custom.css' %}">
-  <style>
-    @keyframes rotate {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-  </style>
 
   <!-- FontAwesome -->
   <script src="https://kit.fontawesome.com/113d723285.js" crossorigin="anonymous"></script>
@@ -48,8 +38,6 @@
   <div class="page-loader"></div>
 
   <div class="content-wrapper">
-    {% include 'website/layouts/header.html' %}
-    <!-- /header -->
 
     {% if messages %}
       {% for message in messages %}
@@ -70,45 +58,6 @@
     {% block main %}{% endblock main %}
   </div>
   <!-- /.content-wrapper -->
-
-  {% include 'website/layouts/footer.html' %}
-  <!-- /.footer -->
-
-  <div class="progress-wrap">
-    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
-      <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
-    </svg>
-  </div>
-
-  <script src="{% static 'sandbox/assets/js/plugins.js' %}"></script>
-  <script src="{% static 'sandbox/assets/js/theme.js' %}"></script>
-
-  <div id="loading_screen" style="
-    display: none;
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, .7);
-    color: white;
-    z-index: 999999999999;
-  ">
-    <i class="uil uil-spinner-alt" style="color: white; animation: 1s linear 0s infinite rotate"></i>
-  </div>
-
-  <script>
-    const show_loading_screen = () => {
-      const loading_screen = document.getElementById("loading_screen");
-      loading_screen.style.display = "flex";
-    }
-    const hide_loading_screen = () => {
-      const loading_screen = document.getElementById("loading_screen");
-      loading_screen.style.display = "none";
-    }
-  </script>
 
   {% block extra_js %}{% endblock extra_js %}
 </body>

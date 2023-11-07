@@ -231,8 +231,8 @@ class Terms(View):
 
 # ERROR HANDLERS
 def handle_404_error(request, exception):
-    return render(request, 'rogan/errors/404.html')
+    return render(request, 'website/errors/404.html')
 
 
 def handle_500_error(request):
-    return render(request, 'rogan/errors/500.html')
+    return render(request, 'website/errors/500.html')

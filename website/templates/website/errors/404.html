@@ -1,17 +1,27 @@
-{% extends 'sandbox/layouts/empty.html' %}
+{% extends 'website/layouts/empty.html' %}
 {% load static %}
 
 
-{% block main_content %}
+{% block main %}
+    <section class="wrapper bg-light">
+      <div class="container pt-12 pt-md-14 pb-14 pb-md-16">
+        <div class="row">
+          <div class="col-lg-9 col-xl-8 mx-auto">
+            <figure class="mb-10"><img class="img-fluid" src="{% static 'sandbox/assets/img/illustrations/404.png' %}" srcset="./assets/img/illustrations/404@2x.png 2x" alt=""></figure>
+          </div>
+          <!-- /column -->
+          <div class="col-lg-8 col-xl-7 col-xxl-6 mx-auto text-center">
+            <h1 class="mb-3">Oops! Page Introuvable</h1>
+            <p class="lead mb-7 px-md-12 px-lg-5 px-xl-7">La page que vous cherchez n'existe pas ou elle a été déplacée.</p>
 
-    <div class="error-page">
-        <div>
-            <h2>404 - Page Introuvable</h2>
-            <p>La page que vous cherchez n'existe pas ou elle a été déplacée.</p>
-            <a href="/" class="theme-btn solid-button-one button-rose">
+            <a href="/" class="btn btn-primary rounded-pill">
                 Revenir à la page d'accueil
             </a>
+          </div>
+          <!-- /column -->
         </div>
-    </div>
-
-{% endblock main_content %}
+        <!-- /.row -->
+      </div>
+      <!-- /.container -->
+    </section>
+{% endblock main %}
