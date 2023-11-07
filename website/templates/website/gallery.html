@@ -17,12 +17,12 @@
       <!-- /column -->
     </div>
     <!-- /.row -->
-    <div class="grid grid-view projects-masonry">
+    <div id="gallery-wrapper" class="grid grid-view projects-masonry">
       <div class="isotope-filter filter mb-10">
         <ul>
-          <li><a class="filter-item active" data-filter="*">All</a></li>
+          <li><a class="filter-item active album-link" data-filter="*">All</a></li>
           {% for album in albums %}
-            <li><a class="filter-item" data-filter=".{{ album.slug }}">{{ album.title }}</a></li>
+            <li><a class="filter-item album-link" data-filter=".{{ album.slug }}">{{ album.title }}</a></li>
           {% endfor %}
         </ul>
       </div>
@@ -31,7 +31,23 @@
           <div class="project item col-md-6 col-xl-4 {{ image.album.slug }}">
             <figure class="overlay overlay-1 rounded">
               <a href="{{ image.photo.url }}" data-glightbox data-gallery="shots-group">
-                 <img src="{{ image.photo.url }}" alt="{{ image.title }}" />
+                {% if forloop.counter0 < 10 %}
+                  <!-- Instant loading of the first 10 pictures -->
+                  <img src="{{ image.photo.url }}" alt="{{ image.title }}" />
+                {% else %}
+                  <!-- Lazy loading the rest -->
+                  <img
+                    class="lazy"
+                    width="{{ image.photo.width }}px"
+                    height="{{ image.photo.height }}px"
+                    data-src="{{ image.photo.url }}"
+                    alt="{{ image.title }}"
+                    style="
+                      background-color: #eee;
+                      opacity: 0;
+                    "
+                  />
+                {% endif %}
               </a>
               <figcaption>
                 <h5 class="from-top mb-0">{{ image.title }}</h5>
@@ -48,3 +64,46 @@
 </section>
 <!-- /section -->
 {% endblock main %}
+
+{% block extra_js %}
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var lazyloadImages = document.querySelectorAll("img.lazy");
+      var galleryWrapper = document.getElementById("gallery-wrapper");
+      var album_links = document.querySelectorAll(".album-link");
+      var lazyloadThrottleTimeout;
+
+      function lazyload () {
+        if(lazyloadThrottleTimeout) {
+          clearTimeout(lazyloadThrottleTimeout);
+        }
+
+        lazyloadThrottleTimeout = setTimeout(function() {
+            var scrollTop = window.pageYOffset;
+            lazyloadImages.forEach(function(img) {
+                // Images are loaded 50px before they come into view.
+                if(img.offsetTop < (window.innerHeight + scrollTop + 50)) {
+                  img.src = img.dataset.src;
+                  img.classList.remove('lazy');
+                  img.style.opacity = 1;
+                  // Fire tabs adjust script.
+                  window.dispatchEvent(new Event("resize"));
+                }
+            });
+            if(lazyloadImages.length == 0) {
+              document.removeEventListener("scroll", lazyload);
+              window.removeEventListener("resize", lazyload);
+              window.removeEventListener("orientationChange", lazyload);
+            }
+        }, 20);
+      }
+
+      document.addEventListener("scroll", lazyload);
+      window.addEventListener("resize", lazyload);
+      window.addEventListener("orientationChange", lazyload);
+      album_links.forEach(album_link => {
+        album_link.addEventListener("click", lazyload);
+      });
+    });
+  </script>
+{% endblock extra_js %}

@@ -1,6 +1,9 @@
 from django.contrib import admin
 
-from website.models import Message, Slide, Button, Counter, NewsLetter, Application
+from website.models import (
+    Message, Slide, Button, Counter, NewsLetter, Application,
+    Testimonial
+)
 
 
 @admin.register(Message)
@@ -32,6 +35,12 @@ class SlideAdmin(admin.ModelAdmin):
 class CounterAdmin(admin.ModelAdmin):
     list_display = ["title", "icon", "count_to"]
     fields = ["title", "icon", "count_to"]
+
+
+@admin.register(Testimonial)
+class TestimonialAdmin(admin.ModelAdmin):
+    # list_display = ["__str__"]
+    pass
 
 
 @admin.register(NewsLetter)

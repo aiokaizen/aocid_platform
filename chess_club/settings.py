@@ -80,6 +80,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                # Custom processors
+                'club.context_processors.club',
             ],
         },
     },
@@ -150,7 +153,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 THUMBNAIL_ALIASES = {
     '': {
-        'thumbnail': {'size': (50, 50), 'crop': True},
+        'thumbnail': {'size': (100, 100), 'crop': True},
     },
     "blog.Post.image": {
         "small": {"size": (100, 100), "crop": True},

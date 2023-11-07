@@ -8,13 +8,13 @@ from django.http.response import JsonResponse
 from django.contrib import messages
 
 from website.forms import MessageForm, AddEmailForm, ApplicationForm
-from website.models import Counter, Slide
 from website.models import *
 
 from blog.models import Post
 
 from club.models import (
-    Book, Album, Media
+    Book, Album, Media,
+    Committee, Member
 )
 
 
@@ -37,6 +37,9 @@ class Home(View):
         # All projects categories
         categories = Category.objects.all()
 
+        # Testimonials
+        testimonials = Testimonial.objects.all()
+
         context = {
             "title": _("Home - Ait Ourir Chess Club"),
             "current_page": "home",
@@ -45,6 +48,7 @@ class Home(View):
             "posts": posts,
             "projects": projects,
             "categories": categories,
+            "testimonials": testimonials,
         }
 
         return render(request, "website/home.html", context=context)
@@ -68,9 +72,23 @@ class Home(View):
 class AboutUs(View):
 
     def get(self, request):
+
+        committees = Committee.objects.all()
+        executive_members = Member.objects.all()
+        teams = [
+            {
+                "name": _("Membres exécutifs"),
+                "members": executive_members,
+            },
+            *[ {
+                "name": committee.name,
+                "members": committee.members.all()
+            } for committee in committees ]
+        ]
         context = {
             "title": _("About - Ait Ourir Chess Club"),
             "current_page": "about_us",
+            "teams": teams,
         }
         return render(request, "website/about_us.html", context)
 

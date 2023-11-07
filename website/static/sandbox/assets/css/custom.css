@@ -2,6 +2,24 @@
   animation: rotate 2s infinite ease-in-out;
 }
 
+#admin-btn {
+  background-color: rgba(255, 255, 255, 1);
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 99999;
+  width: 60px;
+  padding: 5px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, .2);
+}
+
+#admin-btn img {
+  width: 100%;
+}
+
 @keyframes rotate {
   0% {
     transform: rotate(0deg);

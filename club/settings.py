@@ -9,18 +9,19 @@ PERIOD_CHOICES = (
 
 
 MEMBER_ROLE_CHOICES = getattr(settings, "MEMBER_ROLE_CHOICES", (
-    ("president", _("Président")),
-    ("vice_president", _("Vice président")),
-    ("secretary_general", _("Secrétaire générale")),
-    ("vice_secretary_general", _("Vice secrétaire générale")),
-    ("treasurer", _("Trésorier")),
-    ("vice_treasurer", _("Vice trésorier")),
-    ("council_member", _("Conseiller")),
+    ("1_president", _("Président")),
+    ("2_vice_president", _("Vice président")),
+    ("3_secretary_general", _("Secrétaire générale")),
+    ("4_treasurer", _("Trésorier")),
+    ("5_vice_secretary_general", _("Vice secrétaire générale")),
+    ("6_vice_treasurer", _("Vice trésorier")),
+    ("7_council_member", _("Conseiller")),
 ))
 
 
 COMMITTEE_MEMBER_ROLE_CHOICES = getattr(settings, "COMMITTEE_MEMBER_ROLE_CHOICES", (
-    ("coordinator", _("Coordinateur / Coordinatrice")),
+    ("coordinator", _("Coordinateur")),
+    ("coordinator_f", _("Coordinatrice")),
     ("deputy", _("Adjoint")),
 ))
 

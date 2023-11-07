@@ -15,7 +15,6 @@ def get_now_plus_one_hour():
 
 def get_model_file_filename(instance, filename):
     filename, ext = os.path.splitext(filename)
-    print("dir instance:", dir(instance))
     model_name = instance.__class__.__name__.lower()
     now = timezone.now()
     year, month, day = now.year, now.month, now.day

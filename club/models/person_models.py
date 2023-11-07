@@ -128,6 +128,7 @@ class Member(Person):
     class Meta:
         verbose_name = _("Membre exécutif")
         verbose_name_plural = _("Membres exécutifs")
+        ordering = ("role", "user")
 
     user = models.ForeignKey(
         User, on_delete=models.PROTECT, null=True, blank=True,
@@ -157,7 +158,8 @@ class CommitteeMember(Person):
         verbose_name=_("Personne")
     )
     committee = models.ForeignKey(
-        Committee, on_delete=models.PROTECT, verbose_name=_("Comité")
+        Committee, on_delete=models.PROTECT, verbose_name=_("Comité"),
+        related_name="members"
     )
     role = models.CharField(
         _("Fonction"), max_length=64, default="member",

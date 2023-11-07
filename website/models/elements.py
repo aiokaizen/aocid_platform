@@ -17,13 +17,20 @@ from easy_thumbnails.fields import ThumbnailerImageField
 from autoslug import AutoSlugField
 
 from website.validators import validate_file_extension
+from website.utils import get_model_file_filename
 
 
 class Slide(models.Model):
     alignments = [
+        ("topleft", "Top Left"),
+        ("top", "Top"),
+        ("topright", "Top Right"),
         ("left", "Left"),
         ("center", "Center"),
         ("right", "Right"),
+        ("bottomleft", "Bottom Left"),
+        ("bottom", "Bottom"),
+        ("bottomright", "Bottom Right"),
     ]
 
     class Meta:
@@ -80,3 +87,20 @@ class Counter(models.Model):
 
     def __str__(self):
         return f"{self.title} Counter"
+
+
+class Testimonial(models.Model):
+
+    class Meta:
+        verbose_name = _("Témoignage")
+        verbose_name_plural = _("Témoignages")
+
+    author_name = models.CharField(_("Nom de l'auteur"), max_length=256)
+    author_job = models.CharField(_("Fonction de l'auteur"), max_length=256)
+    author_picture = ThumbnailerImageField(
+        verbose_name=_("Image de l'auteur"), upload_to=get_model_file_filename
+    )
+    testimony = models.TextField(_("Témoignage"))
+
+    def __str__(self):
+        return f"{self.author_name}"
