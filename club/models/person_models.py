@@ -117,7 +117,7 @@ class Committee(models.Model):
         verbose_name = _("Comité")
         verbose_name_plural = _("Comités")
 
-    name = models.CharField(_("Nom de la comité"), max_length=256)
+    name = models.CharField(_("Nom du comité"), max_length=256)
 
     def __str__(self):
         return self.name
