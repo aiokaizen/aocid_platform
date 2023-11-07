@@ -12,8 +12,8 @@ MEMBER_ROLE_CHOICES = getattr(settings, "MEMBER_ROLE_CHOICES", (
     ("1_president", _("Président")),
     ("2_vice_president", _("Vice président")),
     ("3_secretary_general", _("Secrétaire générale")),
-    ("4_treasurer", _("Trésorier")),
-    ("5_vice_secretary_general", _("Vice secrétaire générale")),
+    ("4_vice_secretary_general", _("Vice secrétaire générale")),
+    ("5_treasurer", _("Trésorier")),
     ("6_vice_treasurer", _("Vice trésorier")),
     ("7_council_member", _("Conseiller")),
 ))

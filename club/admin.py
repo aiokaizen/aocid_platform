@@ -1,4 +1,8 @@
 from django.contrib import admin
+from django.utils.translation import gettext_lazy as _
+from django.utils.html import mark_safe
+
+from easy_thumbnails.templatetags.thumbnail import thumbnail_url
 
 from club.models import (
     Club, Plan, Subscription,
@@ -7,6 +11,53 @@ from club.models import (
     Payment, Expense, Family,
     Book, Album, Media, Session
 )
+
+
+class PersonAdminMixin:
+
+    fields = [
+        ("photo_tag", "photo"),
+        "first_name",
+        "last_name",
+        "birthday",
+        "birth_place",
+        "cnie",
+        "chronic_disease",
+        "disease_description",
+
+        # Address
+        # "country",
+        "city",
+        "postal_code",
+        "street_address",
+
+        # Contact informations
+        "email",
+        "phone_number",
+        "fix_number",
+
+        # Social Media
+        "facebook_account",
+        "instagram_account",
+        "tiktok_account",
+    ]
+    readonly_fields = ( "photo_tag", )
+
+    def photo_tag(self, obj):
+        """ self.photo's HTML tag for use with Django Admin """
+        if obj.photo:
+            return mark_safe(
+                '<img src="%s" style="border-radius: 50%%;" />'
+                % (thumbnail_url(obj.photo, "thumbnail"))
+            )
+
+        return mark_safe(
+            """<div style="width: 30vw"><img
+                src="/static/sandbox/assets/img/avatars/generic.jpeg"
+                style="border-radius: 50%;" width="100"/></div>"""
+        )
+
+    photo_tag.short_description = _("Visualisation")
 
 
 @admin.register(Club)
@@ -45,27 +96,45 @@ class CommitteeAdmin(admin.ModelAdmin):
 
 
 @admin.register(Member)
-class MemberAdmin(admin.ModelAdmin):
-    pass
+class MemberAdmin(PersonAdminMixin, admin.ModelAdmin):
+    fields = [
+        *PersonAdminMixin.fields,
+        "user",
+        "role",
+    ]
 
 
 @admin.register(CommitteeMember)
-class CommitteeMemberAdmin(admin.ModelAdmin):
-    pass
+class CommitteeMemberAdmin(PersonAdminMixin, admin.ModelAdmin):
+    fields = [
+        *PersonAdminMixin.fields,
+        "user",
+        "player",
+        "committee",
+        "role",
+    ]
 
 
 @admin.register(Player)
-class PlayerAdmin(admin.ModelAdmin):
-    pass
+class PlayerAdmin(PersonAdminMixin, admin.ModelAdmin):
+    fields = [
+        *PersonAdminMixin.fields,
+        "guardian",
+        "elo",
+        "family",
+    ]
+
+
+@admin.register(Guardian)
+class GuardianAdmin(PersonAdminMixin, admin.ModelAdmin):
+    fields = [
+        *PersonAdminMixin.fields,
+        # "",
+    ]
 
 
 @admin.register(Family)
 class FamilyAdmin(admin.ModelAdmin):
-    pass
-
-
-@admin.register(Guardian)
-class GuardianAdmin(admin.ModelAdmin):
     pass
 
 
