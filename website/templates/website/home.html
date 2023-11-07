@@ -56,12 +56,20 @@
                     {% elif slider.alignment == "bottomright"%}
                     <div class="col-md-10 offset-md-1 col-lg-7 col-xl-6 offset-lg-5 offset-xl-6 offset-xxl-6 col-xxl-5 text-center text-lg-start justify-content-center align-self-end align-items-start">
                     {% endif %}
-                      <h2 class="display-1 fs-56 mb-4 text-white animate__animated animate__slideInDown animate__delay-1s">{{ slider.title }}</h2>
-                      <p class="lead fs-23 lh-sm mb-7 text-white animate__animated animate__slideInRight animate__delay-2s">{{ slider.description }}</p>
+                      <h2 style="text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;" class="display-1 fs-56 mb-4 text-white animate__animated animate__slideInDown animate__delay-1s">
+                        {{ slider.title|safe }}
+                      </h2>
+                      <p style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;" class="lead fs-23 lh-sm mb-7 text-white animate__animated animate__slideInRight animate__delay-2s">
+                        {{ slider.description }}
+                      </p>
                       <div class="animate__animated animate__slideInUp animate__delay-3s">
                         {% for button in slider.buttons.all %}
                           {% if button.type == "video" %}
-                          <div class="animate__animated animate__slideInUp animate__delay-3s"><a href="{{ button.action }}" class="btn btn-circle btn-white btn-play ripple mx-auto mb-5" data-glightbox><i class="icn-caret-right"></i></a></div>
+                          <div class="animate__animated animate__slideInUp animate__delay-3s">
+                            <a href="{{ button.action }}" class="btn btn-circle btn-white btn-play ripple mx-auto mb-5" data-glightbox>
+                              <i class="icn-caret-right"></i>
+                            </a>
+                          </div>
                           {% elif button.type == "internal link" %}
                           <a href="{{ button.action }}" class="btn btn-lg btn-outline-white rounded-pill">{{ button.title }}</a>
                           {% elif button.type == "external link" %}
