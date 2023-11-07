@@ -19,8 +19,8 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    path('aocidadmin/', admin.site.urls),
-    path("blog/", include("blog.urls")),
+    path('aocidadmin', admin.site.urls),
+    path("blog", include("blog.urls")),
     path("", include("website.urls")),
 ]
 
