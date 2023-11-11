@@ -5,3 +5,4 @@ local_settings.py
 *.pyc
 .vscode
 db.sqlite3
+/tmp

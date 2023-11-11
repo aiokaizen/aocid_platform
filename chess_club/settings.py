@@ -47,6 +47,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
+    # Fake admin login page
+    "admin_honeypot",
+
     "easy_thumbnails",
     'ckeditor',
     'ckeditor_uploader',
