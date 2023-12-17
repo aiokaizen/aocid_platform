@@ -28,40 +28,57 @@
 <!-- Sliders -->
 {% if sliders %}
 <section class="wrapper bg-dark">
-    <div class="swiper-container swiper-hero dots-over" data-margin="0" data-autoplay="true" data-autoplaytime="7000" data-nav="true" data-dots="true" data-items="1">
-      <div class="swiper">
+    <div class="swiper-container dots-over" style="height: 500px; max-height: 90vh;" data-margin="0" data-autoplay="true" data-autoplaytime="7000" data-nav="true" data-dots="true" data-items="1">
+      <div class="swiper" style="height: 500px; max-height: 90vh;">
         <div class="swiper-wrapper">
           {% for slider in sliders %}
-          <div class="swiper-slide bg-overlay bg-overlay-400 bg-dark bg-image" data-image-src="{{ slider.image|thumbnail_url:'large' }}">
+          <div class="swiper-slide {% if slider.title and slider.description %}bg-overlay bg-overlay-400 bg-dark {% endif %}bg-image"
+              data-image-src="{{ slider.image|thumbnail_url:'large' }}"
+              style="background-size: cover; background-position: center;"
+          >
                 <div class="container h-100">
                   <div class="row h-100">
                     <!-- TOPS -->
                     {% if slider.alignment == "topleft"%}
-                    <div class="col-md-10 offset-md-1 col-lg-7 offset-lg-0 col-xl-6 col-xxl-5 text-center text-lg-start justify-content-center align-self-start align-items-start">
+                    <div class="col-md-10 offset-md-1 col-lg-7 p-3 offset-lg-0 col-xl-6 col-xxl-5 text-center text-lg-start justify-content-center align-self-start align-items-start">
                     {% elif slider.alignment == "top"%}
                     <div class="col-md-10 col-lg-8 col-xl-7 col-xxl-6 mx-auto text-center justify-content-center align-self-start">
                     {% elif slider.alignment == "topright"%}
-                    <div class="col-md-10 offset-md-1 col-lg-7 col-xl-6 offset-lg-5 offset-xl-6 offset-xxl-6 col-xxl-5 text-center text-lg-start justify-content-center align-self-start align-items-start">
+                    <div class="col-md-10 offset-md-1 col-lg-7 p-3 col-xl-6 offset-lg-5 offset-xl-6 offset-xxl-6 col-xxl-5 text-center text-lg-start justify-content-center align-self-start align-items-start">
                     <!-- MIDDLES -->
                     {% elif slider.alignment == "left"%}
-                    <div class="col-md-10 offset-md-1 col-lg-7 offset-lg-0 col-xl-6 col-xxl-5 text-center text-lg-start justify-content-center align-self-center align-items-start">
+                    <div class="col-md-10 offset-md-1 col-lg-7 p-3 offset-lg-0 col-xl-6 col-xxl-5 text-center text-lg-start justify-content-center align-self-center align-items-start">
                     {% elif slider.alignment == "center"%}
                     <div class="col-md-10 col-lg-8 col-xl-7 col-xxl-6 mx-auto text-center justify-content-center align-self-center">
                     {% elif slider.alignment == "right"%}
-                    <div class="col-md-10 offset-md-1 col-lg-7 col-xl-6 offset-lg-5 offset-xl-6 offset-xxl-6 col-xxl-5 text-center text-lg-start justify-content-center align-self-center align-items-start">
+                    <div class="col-md-10 offset-md-1 col-lg-7 p-3 col-xl-6 offset-lg-5 offset-xl-6 offset-xxl-6 col-xxl-5 text-center text-lg-start justify-content-center align-self-center align-items-start">
                     {% elif slider.alignment == "bottomleft"%}
-                    <div class="col-md-10 offset-md-1 col-lg-7 offset-lg-0 col-xl-6 col-xxl-5 text-center text-lg-start justify-content-center align-self-end align-items-start">
+                    <div class="col-md-10 offset-md-1 col-lg-7 p-3 offset-lg-0 col-xl-6 col-xxl-5 text-center text-lg-start justify-content-center align-self-end align-items-start">
                     {% elif slider.alignment == "bottom"%}
                     <div class="col-md-10 col-lg-8 col-xl-7 col-xxl-6 mx-auto text-center justify-content-center align-self-end">
                     {% elif slider.alignment == "bottomright"%}
-                    <div class="col-md-10 offset-md-1 col-lg-7 col-xl-6 offset-lg-5 offset-xl-6 offset-xxl-6 col-xxl-5 text-center text-lg-start justify-content-center align-self-end align-items-start">
+                    <div class="col-md-10 offset-md-1 col-lg-7 p-3 col-xl-6 offset-lg-5 offset-xl-6 offset-xxl-6 col-xxl-5 text-center text-lg-start justify-content-center align-self-end align-items-start">
                     {% endif %}
-                      <h2 style="text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;" class="display-1 fs-56 mb-4 text-white animate__animated animate__slideInDown animate__delay-1s">
+                    {% if slider.title %}
+                      <h2 style="
+                        -webkit-text-stroke-width: 1.5px;
+                        -webkit-text-stroke-color: black;
+                        margin-bottom: 0 !important;
+                      " class="display-1 fs-56 mb-4 text-white animate__animated animate__slideInDown animate__delay-1s">
                         {{ slider.title|safe }}
                       </h2>
-                      <p style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;" class="lead fs-23 lh-sm mb-7 text-white animate__animated animate__slideInRight animate__delay-2s">
+                    {% endif %}
+                    {% if slider.description %}
+                      <p style="
+                        -webkit-text-stroke-width: 1px;
+                        -webkit-text-stroke-color: black;
+                        font-weight: bold;
+                        font-size: 1.45rem !important;
+                      " class="lead fs-23 lh-sm mb-7 text-white animate__animated animate__slideInRight animate__delay-2s">
                         {{ slider.description }}
                       </p>
+                    {% endif %}
+                    {% if slider.buttons %}
                       <div class="animate__animated animate__slideInUp animate__delay-3s">
                         {% for button in slider.buttons.all %}
                           {% if button.type == "video" %}
@@ -77,6 +94,7 @@
                           {% endif %}
                         {% endfor %}
                       </div>
+                    {% endif %}
                     </div>
                     <!--/column -->
                   </div>
@@ -100,7 +118,7 @@
 <section class="wrapper bg-light">
   <div class="container py-9 py-md-12">
     <div class="row gx-md-8 gy-10 align-items-center">
-      <div class="col-lg-6 offset-lg-1 order-lg-2 position-relative">
+      <div class="col-lg-5 offset-lg-1 order-lg-2 position-relative">
         <figure class="rounded">
             <img class="img-fluid"
                 src="{% static 'sandbox/assets/img/photos/director.jpg' %}"
@@ -108,14 +126,11 @@
         </figure>
       </div>
       <!--/column -->
-      <div class="col-lg-5">
-        <h2 class="fs-16 text-uppercase text-gradient gradient-1 mb-3">Édito du directeur</h2>
-        <h3 class="display-4 mb-4 me-lg-n5">Hicham Lemcherfi</h3>
-        <p class="mb-6">
-            Etiam porta sem malesuada magna mollis euismod.
-            Donec ullamcorper nulla non metus auctor fringilla.
-            Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-            Fusce dapibus, tellus ac cursus. Integer posuere erat a ante venenatis dapibus posuere velit.
+      <div class="col-lg-6">
+        <h2 class="text-gradient gradient-1 w-100 mb-3 ar">كلمة الرئيس</h2> <!-- Édito du directeur -->
+        <h3 class="display-4 mb-4 me-lg-n5 ar">السيد هشام المشرفي</h3>
+        <p class="mb-6 ar text-align-right">
+تأسس نادي أيت أورير للشطرنج و تنمية الذكاءات سنة 2010 و كان الغرض من تأسيسه تنمية قدرة منخرطيه في مجال رياضة الشطرنج و إكسابهم مهارة التحليل و دراسة جميع الاحتمالات و التخطيط و المشاركة الجماعية و التعاون في حل المشاكل و من أجل التثقيف بالنظر، و ترسيخ دينامية التنشيط المجالي الخاص بهذه الرياضة الذهنية، حيث تعاقب على رآسة هذا النادي 6 مكاتب لحد الآن نهجت سياسة مقاربة النوع و عملت دائما على إشراك جميع الفئات من أطفال و نساء و شبان في بناء جميع أنشطتها، هذه الفئات التي مثلت النادي في عدة محافل محلية و جهوية و وطنية.
         </p>
       </div>
       <!--/column -->
@@ -278,20 +293,12 @@
   <div class="container py-10 py-md-6">
     <h2 class="fs-15 text-uppercase text-primary text-center">Partenariat</h2>
     <h3 class="display-4 mb-6 text-center">Nos Partenaires</h3>
-    <div class="swiper-container clients mb-0" data-margin="30" data-dots="false" data-autoplay-timeout="1000" data-speed="1000" data-autoplay="true" data-loop="true" data-items-xxl="7" data-items-xl="6" data-items-lg="5" data-items-md="4" data-items-xs="2">
+    <div class="swiper-container clients mb-0" data-margin="30" data-dots="false" data-autoplay-timeout="1000" data-speed="1000" data-autoplay="true" data-loop="false" data-items-xxl="7" data-items-xl="6" data-items-lg="5" data-items-md="4" data-items-xs="2">
       <div class="swiper">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide px-5"><img src="{% static 'sandbox/assets/img/brands/c1.png' %}" alt="" /></div>
-          <div class="swiper-slide px-5"><img src="{% static 'sandbox/assets/img/brands/c2.png' %}" alt="" /></div>
-          <div class="swiper-slide px-5"><img src="{% static 'sandbox/assets/img/brands/c3.png' %}" alt="" /></div>
-          <div class="swiper-slide px-5"><img src="{% static 'sandbox/assets/img/brands/c4.png' %}" alt="" /></div>
-          <div class="swiper-slide px-5"><img src="{% static 'sandbox/assets/img/brands/c5.png' %}" alt="" /></div>
-          <div class="swiper-slide px-5"><img src="{% static 'sandbox/assets/img/brands/c6.png' %}" alt="" /></div>
-          <div class="swiper-slide px-5"><img src="{% static 'sandbox/assets/img/brands/c7.png' %}" alt="" /></div>
-          <div class="swiper-slide px-5"><img src="{% static 'sandbox/assets/img/brands/c8.png' %}" alt="" /></div>
-          <div class="swiper-slide px-5"><img src="{% static 'sandbox/assets/img/brands/c9.png' %}" alt="" /></div>
-          <div class="swiper-slide px-5"><img src="{% static 'sandbox/assets/img/brands/c10.png' %}" alt="" /></div>
-          <div class="swiper-slide px-5"><img src="{% static 'sandbox/assets/img/brands/c11.png' %}" alt="" /></div>
+        <div class="swiper-wrapper align-items-center justify-content-center">
+          <div class="swiper-slide px-5"><img src="{% static 'club/images/partners/commune ait ourir.png' %}" alt="" /></div>
+          <div class="swiper-slide px-5"><img src="{% static 'club/images/partners/moroccan chess.jpeg' %}" alt="" /></div>
+          <div class="swiper-slide px-5"><img src="{% static 'club/images/partners/ennassimi.png' %}" alt="" /></div>
         </div>
         <!--/.swiper-wrapper -->
       </div>

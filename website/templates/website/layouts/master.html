@@ -27,6 +27,36 @@
   <link rel="stylesheet" href="{% static 'sandbox/assets/css/style.css' %}">
   <link rel="stylesheet" href="{% static 'sandbox/assets/css/custom.css' %}">
   <style>
+    @font-face {
+        font-family: ArabsWell;
+        src: url({% static 'sandbox/assets/fonts/custom/arabswell_1.ttf' %});
+    }
+
+    @font-face {
+        font-family: JosefinBold;
+        src: url({% static 'sandbox/assets/fonts/custom/josefin/JosefinSans-Bold.ttf' %});
+    }
+
+    @font-face {
+        font-family: JosefinRegular;
+        src: url({% static 'sandbox/assets/fonts/custom/josefin/JosefinSans-Regular.ttf' %});
+    }
+
+    * {
+      font-family: "JosefinRegular"
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: "JosefinBold"
+    }
+
+    .ar {
+      font-family: "ArabsWell";
+      text-align: right;
+      direction:rtl;
+    }
+  </style>
+  <style>
     @keyframes rotate {
       0% {
         transform: rotate(0deg);
