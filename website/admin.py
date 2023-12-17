@@ -26,7 +26,7 @@ class ButtonInline(admin.StackedInline):
 
 @admin.register(Slide)
 class SlideAdmin(admin.ModelAdmin):
-    list_display = ["title", "image", "description", "alignment"]
+    list_display = ["__str__", "image", "description", "alignment"]
     fields = ["title", "image", "description", "alignment"]
     inlines = [ButtonInline]
 

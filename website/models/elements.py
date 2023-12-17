@@ -50,7 +50,7 @@ class Slide(models.Model):
     )
 
     def __str__(self):
-        return f"{self.title} Slide"
+        return f"Slide {self.title or self.id}"
 
 
 class Button(models.Model):
