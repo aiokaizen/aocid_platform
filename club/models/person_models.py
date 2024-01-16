@@ -95,8 +95,8 @@ class Guardian(Person):
 class Player(Person):
 
     class Meta:
-        verbose_name = _("Personne")
-        verbose_name_plural = _("Personnes")
+        verbose_name = _("Adhérant")
+        verbose_name_plural = _("Adhérants")
 
     guardian = models.ForeignKey(
         Guardian, verbose_name=_("Tuteur"), on_delete=models.PROTECT,
