@@ -22,7 +22,6 @@ class Command(BaseCommand):
         # Setup defaults
         default_theme_name = "AOCID default theme"
 
-
         # =========================
         #   Environnement
         # =========================
@@ -31,7 +30,6 @@ class Command(BaseCommand):
         env_visible_in_header = False
         env_visible_in_favicon = False
 
-
         # =========================
         #   Language
         # =========================
@@ -39,13 +37,12 @@ class Command(BaseCommand):
         language_chooser_control = "default-select"
         language_chooser_display = "code"
 
-
         # =========================
         #   Logo
         # =========================
         logo_path = os.path.join(
             settings.BASE_DIR,
-            "website/static/sandbox/assets/img/logo/logo.jpeg",
+            "website/static/sandbox/assets/img/logo/logo_yellow_white.png",
         )
         logo_max_width = 150
         logo_max_height = 80
@@ -56,54 +53,48 @@ class Command(BaseCommand):
         #   Favicon
         # =========================
         favicon_path = os.path.join(
-            settings.BASE_DIR, "website/static/sandbox/assets/img/logo/favicon.jpg"
+            settings.BASE_DIR, "website/static/sandbox/assets/img/logo/favicon.png"
         )
-
 
         # =========================
         #   Title
         # =========================
         title = "AOCID Admin Platform"
-        title_color = "#F5DD5D"
+        title_color = "#e2bf4f"
         title_visible = False
-
 
         # =========================
         #   Header
         # =========================
-        css_header_background_color = "#231D57"
-        css_header_text_color = "#F5DD5D"
+        css_header_background_color = "#262e36"
+        css_header_text_color = "#e2bf4f"
         css_header_link_color = "#FFFFFF"
         css_header_link_hover_color = "#FFFFCC"
-
 
         # =========================
         #   Breadcrumbs / Module headers
         # =========================
-        css_module_background_color = "#231D57"
+        css_module_background_color = "#262e36"
         css_module_background_selected_color = "#FFFFCC"
         css_module_text_color = "#FFFFFF"
         css_module_link_color = "#FFFFFF"
-        css_module_link_selected_color = "#F5DD5D"
-        css_module_link_hover_color = "#F5DD5D"
+        css_module_link_selected_color = "#e2bf4f"
+        css_module_link_hover_color = "#e2bf4f"
         css_module_rounded_corners = True
-
 
         # =========================
         #   Generic Links
         # =========================
-        css_generic_link_color = "#231D57"
+        css_generic_link_color = "#262e36"
         css_generic_link_hover_color = "#B3A244"
-        css_generic_link_active_color = "#3643A8"
-
+        css_generic_link_active_color = "#333E49"
 
         # =========================
         #   Save Buttons
         # =========================
-        css_save_button_background_color = "#231D57"
-        css_save_button_background_hover_color = "#2B3585"
-        css_save_button_text_color = "#F5DD5D"
-
+        css_save_button_background_color = "#262e36"
+        css_save_button_background_hover_color = "#333E49"
+        css_save_button_text_color = "#e2bf4f"
 
         # =========================
         #   Delete Buttons
@@ -112,29 +103,25 @@ class Command(BaseCommand):
         css_delete_button_background_hover_color = "#A41515"
         css_delete_button_text_color = "#FFFFFF"
 
-
         # =========================
         #   Navigation Bar
         # =========================
         foldable_apps = True
 
-
         # =========================
         #   Related model
         # =========================
         related_modal_active = True
-        related_modal_background_color = "#231D57"
+        related_modal_background_color = "#262e36"
         related_modal_background_opacity = "0.2"
         related_modal_rounded_corners = True
         related_modal_close_button_visible = True
-
 
         # =========================
         #   Form Controls
         # =========================
         form_submit_sticky = True
         form_pagination_sticky = False
-
 
         # =========================
         #   List Filter
@@ -144,13 +131,11 @@ class Command(BaseCommand):
         list_filter_sticky = True
         list_filter_removal_links = False
 
-
         # =========================
         #   Change form
         # =========================
         show_fieldsets_as_tabs = False
         show_inlines_as_tabs = True
-
 
         # =========================
         #   Inlines
@@ -164,7 +149,6 @@ class Command(BaseCommand):
         #   Recent actions
         # =========================
         recent_actions_visible = True
-
 
         try:
             theme = Theme.objects.get(name=default_theme_name)
