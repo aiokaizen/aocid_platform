@@ -9,3 +9,4 @@ Pillow==10.1.0
 django-autoslug==1.9.9
 requests==2.31.0
 django-ipware==5.0.2
+django-import-export==4.3.7

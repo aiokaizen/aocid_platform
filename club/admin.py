@@ -3,18 +3,30 @@ from django.utils.translation import gettext_lazy as _
 from django.utils.html import mark_safe
 
 from easy_thumbnails.templatetags.thumbnail import thumbnail_url
+from import_export.admin import ImportExportModelAdmin
 
 from club.models import (
-    Club, Plan, Subscription,
-    Insurance, Committee,
-    Member, CommitteeMember, Player, Guardian,
-    Payment, Expense, Family,
-    Book, Album, Media, Session
+    Club,
+    Plan,
+    Subscription,
+    Insurance,
+    Committee,
+    Member,
+    CommitteeMember,
+    Player,
+    Guardian,
+    Payment,
+    Expense,
+    Family,
+    Book,
+    Album,
+    Media,
+    Session,
 )
+from club.resources import PlayerResource
 
 
 class PersonAdminMixin:
-
     fields = [
         ("photo_tag", "photo"),
         "first_name",
@@ -24,27 +36,24 @@ class PersonAdminMixin:
         "cnie",
         "chronic_disease",
         "disease_description",
-
         # Address
         # "country",
         "city",
         "postal_code",
         "street_address",
-
         # Contact informations
         "email",
         "phone_number",
         "fix_number",
-
         # Social Media
         "facebook_account",
         "instagram_account",
         "tiktok_account",
     ]
-    readonly_fields = ( "photo_tag", )
+    readonly_fields = ("photo_tag",)
 
     def photo_tag(self, obj):
-        """ self.photo's HTML tag for use with Django Admin """
+        """self.photo's HTML tag for use with Django Admin"""
         if obj.photo:
             return mark_safe(
                 '<img src="%s" style="border-radius: 50%%;" />'
@@ -61,42 +70,33 @@ class PersonAdminMixin:
 
 
 @admin.register(Club)
-class ClubAdmin(admin.ModelAdmin):
-    readonly_fields = ("sold", )
-    list_display = (
-        "__str__",
-        "sold"
-    )
+class ClubAdmin(ImportExportModelAdmin):
+    readonly_fields = ("sold",)
+    list_display = ("__str__", "sold")
 
 
 @admin.register(Plan)
-class PlanAdmin(admin.ModelAdmin):
+class PlanAdmin(ImportExportModelAdmin):
     pass
 
 
 @admin.register(Insurance)
-class InsuranceAdmin(admin.ModelAdmin):
-    list_display = (
-        "__str__",
-        "amount"
-    )
+class InsuranceAdmin(ImportExportModelAdmin):
+    list_display = ("__str__", "amount")
 
 
 @admin.register(Subscription)
-class SubscriptionAdmin(admin.ModelAdmin):
-    list_display = (
-        "__str__",
-        "date"
-    )
+class SubscriptionAdmin(ImportExportModelAdmin):
+    list_display = ("__str__", "date")
 
 
 @admin.register(Committee)
-class CommitteeAdmin(admin.ModelAdmin):
+class CommitteeAdmin(ImportExportModelAdmin):
     pass
 
 
 @admin.register(Member)
-class MemberAdmin(PersonAdminMixin, admin.ModelAdmin):
+class MemberAdmin(PersonAdminMixin, ImportExportModelAdmin):
     fields = [
         *PersonAdminMixin.fields,
         "user",
@@ -105,7 +105,7 @@ class MemberAdmin(PersonAdminMixin, admin.ModelAdmin):
 
 
 @admin.register(CommitteeMember)
-class CommitteeMemberAdmin(PersonAdminMixin, admin.ModelAdmin):
+class CommitteeMemberAdmin(PersonAdminMixin, ImportExportModelAdmin):
     fields = [
         *PersonAdminMixin.fields,
         "user",
@@ -116,7 +116,8 @@ class CommitteeMemberAdmin(PersonAdminMixin, admin.ModelAdmin):
 
 
 @admin.register(Player)
-class PlayerAdmin(PersonAdminMixin, admin.ModelAdmin):
+class PlayerAdmin(PersonAdminMixin, ImportExportModelAdmin):
+    resource_classes = [PlayerResource]
     fields = [
         *PersonAdminMixin.fields,
         "guardian",
@@ -126,7 +127,7 @@ class PlayerAdmin(PersonAdminMixin, admin.ModelAdmin):
 
 
 @admin.register(Guardian)
-class GuardianAdmin(PersonAdminMixin, admin.ModelAdmin):
+class GuardianAdmin(PersonAdminMixin, ImportExportModelAdmin):
     fields = [
         *PersonAdminMixin.fields,
         # "",
@@ -134,39 +135,35 @@ class GuardianAdmin(PersonAdminMixin, admin.ModelAdmin):
 
 
 @admin.register(Family)
-class FamilyAdmin(admin.ModelAdmin):
+class FamilyAdmin(ImportExportModelAdmin):
     pass
 
 
 @admin.register(Payment)
-class PaymentAdmin(admin.ModelAdmin):
-    readonly_fields = [
-        "payment_date"
-    ]
+class PaymentAdmin(ImportExportModelAdmin):
+    readonly_fields = ["payment_date"]
 
 
 @admin.register(Expense)
-class ExpenseAdmin(admin.ModelAdmin):
-    readonly_fields = [
-        "expense_date"
-    ]
+class ExpenseAdmin(ImportExportModelAdmin):
+    readonly_fields = ["expense_date"]
 
 
 @admin.register(Book)
-class BookAdmin(admin.ModelAdmin):
+class BookAdmin(ImportExportModelAdmin):
     pass
 
 
 @admin.register(Album)
-class AlbumAdmin(admin.ModelAdmin):
+class AlbumAdmin(ImportExportModelAdmin):
     pass
 
 
 @admin.register(Media)
-class MediaAdmin(admin.ModelAdmin):
+class MediaAdmin(ImportExportModelAdmin):
     pass
 
 
 @admin.register(Session)
-class SessionAdmin(admin.ModelAdmin):
-    filter_horizontal = ('absence_list',)
+class SessionAdmin(ImportExportModelAdmin):
+    filter_horizontal = ("absence_list",)
