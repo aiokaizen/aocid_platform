@@ -170,6 +170,12 @@ THUMBNAIL_ALIASES = {
 }
 
 
+# Recipients for contact-form / message notifications
+EMAIL_RECIPIENTS = [
+    "mouadkommir@gmail.com",
+    "contact@aitourirchessclub.ma",
+]
+
 try:
     from .local_settings import *
     from .ckeditor_settings import *

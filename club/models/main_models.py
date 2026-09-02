@@ -161,7 +161,7 @@ class Book(models.Model):
         email = EmailMultiAlternatives(
             subject=gettext("Votre lien de téléchargement est prêt - ") + f" {platform_name}",
             body=body,
-            from_email="noreply@ekblocks.com",
+            from_email="noreply@aitourirchessclub.ma",
             to=[recipient],
             headers={"Message-ID": f"download_book_{self.id}"},
         )

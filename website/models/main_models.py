@@ -46,7 +46,7 @@ class Message(models.Model):
             send_mail(
                 subject=f"New contact message at {platform_name}",
                 message=body,
-                from_email="noreply@ekblocks.com",
+                from_email="noreply@aitourirchessclub.ma",
                 recipient_list=getattr(settings, "EMAIL_RECIPIENTS", [
                     "mouadkommir@gmail.com"
                 ]),
@@ -143,7 +143,7 @@ class Application(models.Model):
             send_mail(
                 subject=f"New contact message at {platform_name}",
                 message=body,
-                from_email="noreply@ekblocks.com",
+                from_email="noreply@aitourirchessclub.ma",
                 recipient_list=getattr(settings, "EMAIL_RECIPIENTS", [
                     "mouadkommir@gmail.com"
                 ]),

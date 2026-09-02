@@ -6,3 +6,6 @@ local_settings.py
 .vscode
 db.sqlite3
 /tmp
+
+.env
+backup.json
