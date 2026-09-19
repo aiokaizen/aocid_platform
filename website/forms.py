@@ -2,9 +2,10 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 
 from website.models import Message, NewsLetter, Application
+from website.antispam import HoneypotMixin
 
 
-class MessageForm(forms.ModelForm):
+class MessageForm(HoneypotMixin, forms.ModelForm):
     class Meta:
         model = Message
         fields = ["name", "email", "message"]
@@ -14,7 +15,7 @@ class MessageForm(forms.ModelForm):
         return self.instance
 
 
-class AddEmailForm(forms.Form):
+class AddEmailForm(HoneypotMixin, forms.Form):
 
     email = forms.EmailField(label=_("Email"))
 
@@ -24,7 +25,7 @@ class AddEmailForm(forms.Form):
         ]
 
 
-class ApplicationForm(forms.ModelForm):
+class ApplicationForm(HoneypotMixin, forms.ModelForm):
     class Meta:
         model = Application
         fields = [

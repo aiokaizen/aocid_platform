@@ -176,6 +176,15 @@ EMAIL_RECIPIENTS = [
     "contact@aitourirchessclub.ma",
 ]
 
+# Shared, on-disk cache so the anti-spam per-IP rate limiter counts correctly
+# across all gunicorn worker processes (the default LocMemCache is per-process).
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+        "LOCATION": os.path.join(BASE_DIR, ".django_cache"),
+    }
+}
+
 try:
     from .local_settings import *
     from .ckeditor_settings import *

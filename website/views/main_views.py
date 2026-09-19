@@ -8,6 +8,7 @@ from django.http.response import JsonResponse
 from django.contrib import messages
 
 from website.forms import MessageForm, AddEmailForm, ApplicationForm
+from website.antispam import is_rate_limited
 from website.models import *
 
 from blog.models import Post
@@ -55,8 +56,20 @@ class Home(View):
 
     def post(self, request):
 
+        if is_rate_limited(request, "newsletter", limit=5):
+            return JsonResponse({
+                "success": False,
+                "message": _("Trop de tentatives. Merci de réessayer plus tard."),
+            })
+
         form = AddEmailForm(request.POST)
         if form.is_valid():
+            # Honeypot filled -> silently pretend success without subscribing.
+            if getattr(form, "is_bot", False):
+                return JsonResponse({
+                    "success": True,
+                    "message": _("Votre email est ajouté avec succès."),
+                })
             newsletter_slug = request.POST.get("newsletter", "#NOT_PROVIDED")
             newsletter = get_object_or_404(NewsLetter, slug=newsletter_slug)
             newsletter.add_email(email=form.cleaned_data["email"])
@@ -103,10 +116,23 @@ class ContactUs(View):
         return render(request, "website/contact_us.html", context=context)
 
     def post(self, request):
+        if is_rate_limited(request, "contact", limit=5):
+            return JsonResponse({
+                "success": False,
+                "message": _("Too many requests. Please try again later."),
+            })
+
         form = MessageForm(request.POST)
         message = _("Please fix the errors below and try again")
         success = False
         if form.is_valid():
+            # Honeypot filled -> drop the spam but pretend it succeeded so the
+            # bot doesn't adjust its payload and retry.
+            if getattr(form, "is_bot", False):
+                return JsonResponse({
+                    "success": True,
+                    "message": _("Your message has been sent successfully. Thank you."),
+                })
             try:
                 form.save()
                 message = _("Your message has been sent successfully. Thank you.")
@@ -204,10 +230,22 @@ class JoinUs(View):
         return render(request, "website/join_us.html", context)
 
     def post(self, request):
+        if is_rate_limited(request, "join", limit=5):
+            return JsonResponse({
+                "success": False,
+                "message": _("Too many requests. Please try again later."),
+            })
+
         form = ApplicationForm(request.POST, request.FILES)
         message = _("Please fix the errors below and try again")
         success = False
         if form.is_valid():
+            # Honeypot filled -> silently drop without saving/emailing.
+            if getattr(form, "is_bot", False):
+                return JsonResponse({
+                    "success": True,
+                    "message": _("Your informations has been saved successfully. Thank you."),
+                })
             try:
                 form.save()
                 message = _("Your informations has been saved successfully. Thank you.")

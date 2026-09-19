@@ -68,6 +68,11 @@
             <p class="text-muted"><strong>*</strong> These fields are required.</p>
             <form class="contact-form needs-validation" action="{% url 'website:contact_us' %}" method="post" novalidate>
               {% csrf_token %}
+              {# Anti-spam honeypot: hidden from real users, must stay empty. #}
+              <div aria-hidden="true" style="position:absolute; left:-9999px; top:-9999px; height:0; width:0; overflow:hidden;">
+                <label for="form_website">Website</label>
+                <input type="text" id="form_website" name="website" tabindex="-1" autocomplete="off">
+              </div>
               <div class="messages text-center"></div>
               <div class="row gx-4">
                 <div class="col-md-6">

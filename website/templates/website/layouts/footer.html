@@ -57,6 +57,11 @@
             <div id="mc_embed_signup2">
               <form action="{% url 'website:home' %}" method="post" class="validate dark-fields needs-validation newsletter-form" id="mc-embedded-subscribe-form2" novalidate>
                 {% csrf_token %}
+                {# Anti-spam honeypot: hidden from real users, must stay empty. #}
+                <div aria-hidden="true" style="position:absolute; left:-9999px; top:-9999px; height:0; width:0; overflow:hidden;">
+                  <label for="nl_website">Website</label>
+                  <input type="text" id="nl_website" name="website" tabindex="-1" autocomplete="off">
+                </div>
                 <div id="mc_embed_signup_scroll2">
                   <div class="mc-field-group input-group form-floating">
                     <input type="email" name="email" id="email" class="form-control" placeholder="Email Address" required>
