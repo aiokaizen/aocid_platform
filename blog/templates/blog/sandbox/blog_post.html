@@ -18,8 +18,8 @@
             <h1 class="display-1 mb-4 text-white">{{ post.title }}</h1>
             <ul class="post-meta text-white">
               <li class="post-date"><i class="uil uil-calendar-alt"></i><span>{{ post.published_at }}</span></li>
-              <li class="post-author"><i class="uil uil-user"></i><a href="#" class="text-reset"><span>By {{ post.author.user.username }}</span></a></li>
-              <li class="post-comments"><i class="uil uil-comment"></i><a href="#comments" class="text-reset">{{ comments|length }}<span> Comments</span></a></li>
+              <li class="post-author"><i class="uil uil-user"></i><a href="#" class="text-reset"><span>Par {{ post.author.user.username }}</span></a></li>
+              <li class="post-comments"><i class="uil uil-comment"></i><a href="#comments" class="text-reset">{{ comments|length }}<span> Commentaires</span></a></li>
               {% comment %} <li class="post-likes"><i class="uil uil-heart-alt"></i><a href="#" class="text-reset">3<span> Likes</span></a></li> {% endcomment %}
             </ul>
             <!-- /.post-meta -->
@@ -93,7 +93,7 @@
                         <div class="mb-0 mb-md-2">
                           <div class="dropdown share-dropdown btn-group">
                             <button class="btn btn-sm btn-red rounded-pill btn-icon btn-icon-start dropdown-toggle mb-0 me-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              <i class="uil uil-share-alt"></i> Share </button>
+                              <i class="uil uil-share-alt"></i> Partager </button>
                             <div class="dropdown-menu">
                               <a class="dropdown-item" href="https://twitter.com/intent/tweet?text={{request.get_host}}{{ request.get_full_path }}"><i class="uil uil-twitter"></i>Twitter</a>
                               <a class="dropdown-item" href="https://www.facebook.com/sharer/sharer.php?u={{request.get_host}}{{ request.get_full_path }}"><i class="uil uil-facebook-f"></i>Facebook</a>
@@ -139,7 +139,7 @@
               <hr />
 
               {% if like_also %}
-              <h3 class="mb-6">You Might Also Like</h3>
+              <h3 class="mb-6">À lire également</h3>
               <div class="swiper-container blog grid-view mb-16" data-margin="30" data-dots="true" data-items-md="2" data-items-xs="1">
                 <div class="swiper">
                   <div class="swiper-wrapper">
@@ -148,7 +148,7 @@
                       <article>
                         <figure class="overlay overlay-1 hover-scale rounded mb-5"><a href="{% url 'blog:blog_post' post=post.slug %}"> <img src="{{ post.image|thumbnail_url:'medium' }}" alt="" /></a>
                           <figcaption>
-                            <h5 class="from-top mb-0">Read More</h5>
+                            <h5 class="from-top mb-0">Lire la suite</h5>
                           </figcaption>
                         </figure>
                         <div class="post-header">
@@ -184,7 +184,7 @@
               {% endif %}
 
               <div id="comments">
-                <h3 class="mb-6">{{ comments|length }} Comments</h3>
+                <h3 class="mb-6">{{ comments|length }} Commentaires</h3>
                 <ol id="singlecomments" class="commentlist">
                   {% for comment in comments %}
                   {% with gravatar=comment.get_gravatar_profile %}
@@ -333,8 +333,8 @@
               <!-- /#comments -->
               <hr />
 
-              <h3 class="mb-3">Would you like to share your thoughts?</h3>
-              <p class="mb-7 text-primary">Required fields are marked *</p>
+              <h3 class="mb-3">Vous souhaitez partager votre avis ?</h3>
+              <p class="mb-7 text-primary">Les champs obligatoires sont marqués *</p>
               <form action="{% url 'blog:blog_post' post=post.slug %}" method="POST" class="validate comment_form needs-validation" novalidate>
                 {% csrf_token %}
                 <div class="messages text-center"></div>
@@ -342,18 +342,18 @@
                 <div class="form-floating mb-4">
                   <input type="email" name="email" class="form-control" placeholder="E-mail*" id="email" required>
                   <label for="email">E-mail *</label>
-                  <div class="invalid-feedback"> Please enter your e-mail </div>
+                  <div class="invalid-feedback"> Veuillez saisir votre e-mail </div>
                 </div>
                 <div class="form-floating mb-4">
-                  <textarea name="content" class="form-control" placeholder="Comment" style="height: 150px" required></textarea>
-                  <label>Comment *</label>
-                  <div class="invalid-feedback"> Please enter your comment </div>
+                  <textarea name="content" class="form-control" placeholder="Commentaire" style="height: 150px" required></textarea>
+                  <label>Commentaire *</label>
+                  <div class="invalid-feedback"> Veuillez saisir votre commentaire </div>
                 </div>
                 <button type="submit" class="btn btn-primary rounded-pill btn-send mb-3 g-recaptcha">
                   <div class="inline btn-loading d-none">
                     <b><i class="uil uil-square" style="font-size: 20px;"></i></b>
                   </div>
-                  <span>Comment</span>
+                  <span>Commenter</span>
                 </button>
               </form>
               <!-- /.comment-form -->

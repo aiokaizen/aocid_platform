@@ -37,14 +37,14 @@
       {% if category_filter %}
         <div class="row gx-lg-8 gx-xl-12 mb-3">
           <div class="col-lg-8">
-            <h4 class=""><span style="color: #777;">Filtered by category:</span> {{ category_filter.name }}</h4>
+            <h4 class=""><span style="color: #777;">Filtré par catégorie :</span> {{ category_filter.name }}</h4>
           </div>
         </div>
       {% endif %}
       {% if tag_filter %}
         <div class="row gx-lg-8 gx-xl-12 mb-3">
           <div class="col-lg-8">
-            <h4 class=""><span style="color: #777;">Filtered by tag:</span> {{ tag_filter.name }}</h4>
+            <h4 class=""><span style="color: #777;">Filtré par étiquette :</span> {{ tag_filter.name }}</h4>
           </div>
         </div>
       {% endif %}
@@ -57,7 +57,7 @@
                 <div class="card">
                   <figure class="card-img-top overlay overlay-1 hover-scale"><a href="{% url 'blog:blog_post' post=post.slug  %}"> <img src="{{ post.image|thumbnail_url:'medium' }}" alt="" /></a>
                     <figcaption>
-                      <h5 class="from-top mb-0">Read More</h5>
+                      <h5 class="from-top mb-0">Lire la suite</h5>
                     </figcaption>
                   </figure>
                   <div class="card-body">

@@ -23,7 +23,7 @@
                 <a class="nav-link {% if current_page == 'home' %}active{% endif %}" href="{% url 'website:home' %}">Accueil</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {% if current_page == 'about_us' %}active{% endif %}" href="{% url 'website:about_us' %}">A Propos</a>
+                <a class="nav-link {% if current_page == 'about_us' %}active{% endif %}" href="{% url 'website:about_us' %}">À propos</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link {% if current_page == 'gallery' %}active{% endif %}" href="{% url 'website:gallery' %}">Médiathèque</a>
@@ -38,7 +38,7 @@
                 <a class="nav-link {% if current_page == 'blog' %}active{% endif %}" href="{% url 'blog:blog' %}">Blog</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {% if current_page == 'contact_us' %}active{% endif %}" href="{% url 'website:contact_us' %}">Contactez Nous</a>
+                <a class="nav-link {% if current_page == 'contact_us' %}active{% endif %}" href="{% url 'website:contact_us' %}">Contactez-nous</a>
               </li>
             </ul>
             <!-- /.navbar-nav -->
@@ -84,11 +84,11 @@
 
       <div class="offcanvas-body pb-6">
         <div class="widget mb-8">
-          <p>Ait Ourir Chess and Intelligence Development Club (AOCID) is a club Lorem ipsum dolor sit amet consectetur adipisicing elit. At nisi blanditiis rem.<p>
+          <p>Le Club d'Échecs et de Développement de l'Intelligence d'Aït Ourir (AOCID) est une association fondée en 2010, dédiée à la promotion des échecs et au développement des capacités d'analyse, de réflexion et de travail d'équipe chez ses membres.<p>
         </div>
         <!-- /.widget -->
         <div class="widget mb-8">
-          <h4 class="widget-title text-white mb-3">Contact Info</h4>
+          <h4 class="widget-title text-white mb-3">Coordonnées</h4>
           <address>
             Dar Chabab <br class="d-none d-md-block" /> Ait Ourir, 42050
           </address>
@@ -99,10 +99,10 @@
         <div class="widget mb-8">
           <h4 class="widget-title text-white mb-3">Voir Plus</h4>
           <ul class="list-unstyled">
-            <li><a href="{% url 'website:about_us' %}#our_story">Qui somme nous?</a></li>
+            <li><a href="{% url 'website:about_us' %}#our_story">Qui sommes-nous ?</a></li>
             <li><a href="{% url 'website:terms' %}#terms_conditions">Conditions d'utilisation</a></li>
-            <li><a href="{% url 'website:terms' %}#privacy_policy">politique de confidentialité</a></li>
-            <li><a href="{% url 'website:contact_us' %}">Contactez Nous</a></li>
+            <li><a href="{% url 'website:terms' %}#privacy_policy">Politique de confidentialité</a></li>
+            <li><a href="{% url 'website:contact_us' %}">Contactez-nous</a></li>
           </ul>
         </div>
         <!-- /.widget -->

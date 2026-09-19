@@ -12,13 +12,13 @@ SYSTEM_GROUPS = {
         "name": _("Conseil d'administration")
     },
     "committee_manager": {
-        "name": _("Gestionnaire de commités")
+        "name": _("Gestionnaire de comités")
     },
     "subscriptions_manager": {
         "name": _("Gestionnaire d'adhésions")
     },
     "content_manager": {
-        "name": _("Gestionnaire de contenue")
+        "name": _("Gestionnaire de contenu")
     },
     "technician": {
         "name": _("Technicien")

@@ -40,7 +40,7 @@
             <!--/column -->
             <div class="col-lg-6">
               <div class="p-10 p-md-11 p-lg-13">
-                <h2 class="display-4 mb-3">Let’s Talk</h2>
+                <h2 class="display-4 mb-3">Discutons ensemble</h2>
                 <p class="lead fs-lg">
                   Nous vous invitons chaleureusement à nous contacter pour toute question,
                   suggestion ou pour simplement échanger des idées. Chez nous, la discussion
@@ -65,7 +65,7 @@
       <div class="col-xl-10 mx-auto">
         <div class="row gy-10 gx-lg-8 gx-xl-12">
           <div class="col-lg-7">
-            <p class="text-muted"><strong>*</strong> These fields are required.</p>
+            <p class="text-muted"><strong>*</strong> Ces champs sont obligatoires.</p>
             <form class="contact-form needs-validation" action="{% url 'website:contact_us' %}" method="post" novalidate>
               {% csrf_token %}
               {# Anti-spam honeypot: hidden from real users, must stay empty. #}
@@ -77,17 +77,17 @@
               <div class="row gx-4">
                 <div class="col-md-6">
                   <div class="form-floating mb-4">
-                    <input id="form_name" type="text" name="name" class="form-control" placeholder="Jane" required>
-                    <label for="form_name">Full Name *</label>
-                    <div class="invalid-feedback"> Please enter your full name. </div>
+                    <input id="form_name" type="text" name="name" class="form-control" placeholder="Jean" required>
+                    <label for="form_name">Nom complet *</label>
+                    <div class="invalid-feedback"> Veuillez saisir votre nom complet. </div>
                   </div>
                 </div>
                 <!-- /column -->
                 <div class="col-md-6">
                   <div class="form-floating mb-4">
                     <input id="form_email" type="email" name="email" class="form-control" placeholder="jane.doe@example.com" required>
-                    <label for="form_email">Email *</label>
-                    <div class="invalid-feedback"> Please provide a valid email address. </div>
+                    <label for="form_email">E-mail *</label>
+                    <div class="invalid-feedback"> Veuillez fournir une adresse e-mail valide. </div>
                   </div>
                 </div>
                 <!-- /column -->
@@ -95,7 +95,7 @@
                   <div class="form-floating mb-4">
                     <textarea id="form_message" name="message" class="form-control" placeholder="Your message" style="height: 150px" required></textarea>
                     <label for="form_message">Message *</label>
-                    <div class="invalid-feedback"> Please enter your messsage. </div>
+                    <div class="invalid-feedback"> Veuillez saisir votre message. </div>
                   </div>
                 </div>
                 <!-- /column -->
@@ -104,7 +104,7 @@
                     <div class="inline btn-loading d-none">
                       <b><i class="uil uil-square" style="font-size: 20px;"></i></b>
                     </div>
-                    <span>Send message</span>
+                    <span>Envoyer le message</span>
                   </button>
                 </div>
                 <!-- /column -->
@@ -120,7 +120,7 @@
                 <div class="icon text-primary fs-28 me-4 mt-n1"> <i class="uil uil-location-pin-alt"></i> </div>
               </div>
               <div>
-                <h5 class="mb-1">Address</h5>
+                <h5 class="mb-1">Adresse</h5>
                 <address>
                   Dar Chabab,
                   <br class="d-xs-none d-sm-none d-md-none" />
@@ -133,7 +133,7 @@
                 <div class="icon text-primary fs-28 me-4 mt-n1"> <i class="uil uil-phone-volume"></i> </div>
               </div>
               <div>
-                <h5 class="mb-1">Phone</h5>
+                <h5 class="mb-1">Téléphone</h5>
                 <a href="tel:+212658804661">(+212) 6 58 80 46 61</a><br /><br />
               </div>
             </div>

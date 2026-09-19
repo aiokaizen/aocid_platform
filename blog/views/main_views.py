@@ -112,7 +112,7 @@ class BlogPost(View):
             message = msg
             success = False
 
-        message = _("Your comment has been sent successfully. Once it is verified by one of our admins it will be displayed publically.")
+        message = _("Your comment has been sent successfully. Once it is verified by one of our admins it will be displayed publicly.")
         success = True
 
         return JsonResponse({"success": success, "message": message})

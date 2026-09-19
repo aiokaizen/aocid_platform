@@ -76,7 +76,7 @@ class Home(View):
             message = result["message"]
             success = result["result"] != "error"
         else:
-            message = _("Votre email est invalid!")
+            message = _("Votre email est invalide !")
             success = False
 
         return JsonResponse({"success": success, "message": message})
