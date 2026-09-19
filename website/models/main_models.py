@@ -74,13 +74,36 @@ class NewsLetter(models.Model):
     )
     json_emails = models.JSONField("Emails list", default=list)
 
+    @staticmethod
+    def _dedupe_emails(emails):
+        """Strip blanks and drop duplicates (case-insensitive), keeping order."""
+        seen = set()
+        result = []
+        for email in emails:
+            email = (email or "").strip()
+            if not email:
+                continue
+            key = email.lower()
+            if key in seen:
+                continue
+            seen.add(key)
+            result.append(email)
+        return result
+
+    def _sync_emails_text(self):
+        """Rewrite the ``emails`` textarea from the deduped ``json_emails``."""
+        self.emails = "".join(f"{email}\n" for email in self.json_emails)
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = self.name
 
         old_obj = NewsLetter.objects.filter(pk=self.pk or 0).first()
         if old_obj and old_obj.emails != self.emails:
-            self.json_emails = self.emails.replace("\r\n", "\n").split("\n") if self.emails else []
+            raw = self.emails.replace("\r\n", "\n").split("\n") if self.emails else []
+            self.json_emails = self._dedupe_emails(raw)
+            # Rewrite the textarea so the stored copy is deduped/normalized too.
+            self._sync_emails_text()
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -92,20 +115,29 @@ class NewsLetter(models.Model):
 
         try:
             validate_email(email)
-
-            self.json_emails.append(email)
-            self.emails += f"{email}\n"
-            super().save(update_fields=["emails", "json_emails"])
-            return {
-                "result": "success",
-                "message": _("L'adresse email est ajoutée avec succès.")
-            }
-        except ValidationError as e:
+        except ValidationError:
             return {
                 "result": "error",
                 "error_code": "invalid",
                 "message": _("L'adresse email n'est pas valide.")
             }
+
+        email = email.strip()
+        existing = {e.strip().lower() for e in self.json_emails}
+        if email.lower() in existing:
+            return {
+                "result": "info",
+                "error_code": "duplicate",
+                "message": _("Cette adresse email est déjà inscrite.")
+            }
+
+        self.json_emails.append(email)
+        self.emails += f"{email}\n"
+        super().save(update_fields=["emails", "json_emails"])
+        return {
+            "result": "success",
+            "message": _("L'adresse email est ajoutée avec succès.")
+        }
 
 
 class Application(models.Model):

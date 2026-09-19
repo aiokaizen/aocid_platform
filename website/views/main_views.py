@@ -72,9 +72,9 @@ class Home(View):
                 })
             newsletter_slug = request.POST.get("newsletter", "#NOT_PROVIDED")
             newsletter = get_object_or_404(NewsLetter, slug=newsletter_slug)
-            newsletter.add_email(email=form.cleaned_data["email"])
-            message = _("Votre email est ajouté avec succès.")
-            success = True
+            result = newsletter.add_email(email=form.cleaned_data["email"])
+            message = result["message"]
+            success = result["result"] != "error"
         else:
             message = _("Votre email est invalid!")
             success = False
